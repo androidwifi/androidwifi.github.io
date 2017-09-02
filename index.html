@@ -92,49 +92,33 @@
 <li>进入webrtc-build-scripts目录, 按照以下指令顺序执行<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># step1 Source all the routines&#10;source android/build.sh&#10;&#10;# step2 Install any dependencies needed&#10;install_dependencies&#10;&#10;# step3 Pull WebRTC&#10;get_webrtc</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>step2可能会遇到问题,<br>issue1: </p>
-<blockquote>
-<p>Reading package lists…<br>W: The repository ‘<a href="http://ppa.launchpad.net/n-muench/programs-ppa/ubuntu" target="_blank" rel="external">http://ppa.launchpad.net/n-muench/programs-ppa/ubuntu</a> xenial Release’ does not have a Release file.<br>W: Failed to fetch <a href="https://packagecloud.io/github/git-lfs/ubuntu/dists/xenial/InRelease" target="_blank" rel="external">https://packagecloud.io/github/git-lfs/ubuntu/dists/xenial/InRelease</a>  Connection timed out after 120022 milliseconds<br>E: Failed to fetch <a href="http://ppa.launchpad.net/n-muench/programs-ppa/ubuntu/dists/xenial/main/binary-amd64/Packages" target="_blank" rel="external">http://ppa.launchpad.net/n-muench/programs-ppa/ubuntu/dists/xenial/main/binary-amd64/Packages</a>  404  Not Found<br>W: Some index files failed to download. They have been ignored, or old ones used instead.</p>
-</blockquote>
+<p>step2可能会遇到问题,<br>issue1:<br><em>Reading package lists…<br>W: The repository ‘<a href="http://ppa.launchpad.net/n-muench/programs-ppa/ubuntu" target="_blank" rel="external">http://ppa.launchpad.net/n-muench/programs-ppa/ubuntu</a> xenial Release’ does not have a Release file.<br>W: Failed to fetch <a href="https://packagecloud.io/github/git-lfs/ubuntu/dists/xenial/InRelease" target="_blank" rel="external">https://packagecloud.io/github/git-lfs/ubuntu/dists/xenial/InRelease</a>  Connection timed out after 120022 milliseconds<br>E: Failed to fetch <a href="http://ppa.launchpad.net/n-muench/programs-ppa/ubuntu/dists/xenial/main/binary-amd64/Packages" target="_blank" rel="external">http://ppa.launchpad.net/n-muench/programs-ppa/ubuntu/dists/xenial/main/binary-amd64/Packages</a>  404  Not Found<br>W: Some index files failed to download. They have been ignored, or old ones used instead.</em></p>
 <p>solution:<br>打开software&amp;Updates——&gt;Other Software—-&gt;反选择选项: <a href="http://ppa.launchpad.net/n-muench/programs-ppa/" target="_blank" rel="external">http://ppa.launchpad.net/n-muench/programs-ppa/</a>…<br>再运行source android/build.sh命令</p>
-<p>Step3遇到的问题<br>issue1:</p>
-<blockquote>
-<p>CalledProcessError: Command ‘git -c core.deltaBaseCacheLimit=2g clone —no-checkout —progress <a href="https://chromium.googlesource.com/android_tools.git" target="_blank" rel="external">https://chromium.googlesource.com/android_tools.git</a><br>遇到此种问题, 只需要确保代理连上, 重新运行get_webrtc即可.</p>
-</blockquote>
-<p>issue2: gs域名导致</p>
-<blockquote>
-<p>Failed to fetch file gs://chromium-webrtc-resources/2a4617e3497d8faa2fdccfa8964da26499eb13d6 for src/resources/</p>
-</blockquote>
+<p>Step3遇到的问题<br>issue1:<br><em><br>CalledProcessError: Command ‘git -c core.deltaBaseCacheLimit=2g clone —no-checkout —progress <a href="https://chromium.googlesource.com/android_tools.git" target="_blank" rel="external">https://chromium.googlesource.com/android_tools.git</a> 
+</em></p>
+<p>遇到此种问题, 只需要确保代理连上, 重新运行get_webrtc即可.</p>
+<p>issue2: gs域名导致<br><em>Failed to fetch file gs://chromium-webrtc-resources/2a4617e3497d8faa2fdccfa8964da26499eb13d6 for src/resources/</em></p>
 <p>solution:<br>手动替换gs://为<a href="https://storage.googleapis.com/" target="_blank" rel="external">https://storage.googleapis.com/</a>, 手动通过以下命令下载:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;wget --no-check-certificate https://storage.googleapis.com/cchromium-webrtc-resources/2a4617e3497d8faa2fdccfa8964da26499eb13d6 -O ./android/webrtc/src/resources/</span><br></pre></td></tr></table></figure></p>
 <p>遇到报错比较多时, 可以通过脚本来执行, 具体脚本(manual_download_helper.py)和执行文件(grep_download_error.log)见以下链接:<br><a href="https://github.com/androidwifi/Utils/tree/master/Python_Downloadwebrtc" target="_blank" rel="external">Batch_DownloadGS</a> 下载</p>
 <p>grep_download_error.log通过下载的download_error.log, 使用以下生成</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat download_error.log | grep &#34;Failed to fetch &#34; &#62; grep_download_error.log</span><br></pre></td></tr></table></figure>
-<p>issue3:</p>
-<blockquote>
-<p>0&gt; Failed to fetch file gs://chromium-android-tools/play-services/10.2.0/31843001b7ce94fbdf71f2a9db76b28548a795fa for /tmp/tmpgAjGdp/LICENSE,</p>
-</blockquote>
+<p>issue3:<br><em>0&gt; Failed to fetch file gs://chromium-android-tools/play-services/10.2.0/31843001b7ce94fbdf71f2a9db76b28548a795fa for /tmp/tmpgAjGdp/LICENSE,</em></p>
 <p>这个里面的目标路径是个临时的/tmp/tmpgAjGdp/LICENSE,所以需要运行前就更改, 不能使用上面的办法,否则每次都会重新提示这种错误. 原因可能是/etc/hosts中的更改 www.googleapis.com 导致重定向</p>
 <p>Solution:</p>
 <ol>
-<li>修改download_from_google_storage.py, 然后单独使用以下命令单独下载. 注意不能使用step3中的get_webrtc, 否则会提示<blockquote>
-<p>Error: 20&gt;<br>20&gt;     You have unstaged changes.<br>20&gt;     Please commit, stash, or reset.</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python ./android/webrtc/src/build/android/play_services download --force</span><br></pre></td></tr></table></figure>
-</blockquote>
-</li>
+<li>修改download_from_google_storage.py, 然后单独使用以下命令单独下载. 注意不能使用step3中的get_webrtc, 否则会提示</li>
 </ol>
+<p><em>Error: 20&gt;<br>20&gt;     You have unstaged changes.<br>20&gt;     Please commit, stash, or reset.</em><br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python ./android/webrtc/src/build/android/play_services download --force</span><br></pre></td></tr></table></figure></p>
 <p>2.注释掉/etc/hosts中的 .www.googleapis.com 代理, 重新get_webrtc</p>
 <p>最后下载成功, 会提示</p>
-<blockquote>
-<p>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/sqlite4java-0.282.jar…<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/linux-x86/libsqlite4java.so…<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/linux-x86_64/libsqlite4java.so…<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/mac-x86_64/libsqlite4java.jnilib…<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/windows-x86/sqlite4java.dll…<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/windows-x86_64/sqlite4java.dll…<br>Hook ‘/usr/bin/python src/build/android/update_deps/update_third_party_deps.py download -b chromium-sqlite4java -l third_party/sqlite4java’ took 91.55 secs</p>
-<p><strong><em>__</em></strong> running ‘/usr/bin/python src/build/android/update_deps/update_third_party_deps.py download -b chromium-robolectric -l third_party/xstream’ in ‘/media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc’<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/xstream/lib/xstream-1.4.8.jar…<br>Hook ‘/usr/bin/python src/build/android/update_deps/update_third_party_deps.py download -b chromium-robolectric -l third_party/xstream’ took 12.28 secs</p>
-<p><strong><em>__</em></strong> running ‘/usr/bin/python src/build/android/update_deps/update_third_party_deps.py download -b chromium-objenesis -l third_party/objenesis’ in ‘/media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc’<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/objenesis/lib/objenesis-2.4.jar…</p>
-</blockquote>
+<p><em>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/sqlite4java-0.282.jar…<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/linux-x86/libsqlite4java.so…<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/linux-x86_64/libsqlite4java.so…<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/mac-x86_64/libsqlite4java.jnilib…<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/windows-x86/sqlite4java.dll…<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/windows-x86_64/sqlite4java.dll…<br>Hook ‘/usr/bin/python src/build/android/update_deps/update_third_party_deps.py download -b chromium-sqlite4java -l third_party/sqlite4java’ took 91.55 secs</em></p>
+<p><em><strong><em>__</em></strong> running ‘/usr/bin/python src/build/android/update_deps/update_third_party_deps.py download -b chromium-robolectric -l third_party/xstream’ in ‘/media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc’</em><br><em>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/xstream/lib/xstream-1.4.8.jar…</em><br><em>Hook ‘/usr/bin/python src/build/android/update_deps/update_third_party_deps.py download -b chromium-robolectric -l third_party/xstream’ took 12.28 secs</em><br><em>&gt;<br><strong><em>__</em></strong> running ‘/usr/bin/python src/build/android/update_deps/update_third_party_deps.py download -b chromium-objenesis -l third_party/objenesis’ in ‘/media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc’<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/objenesis/lib/objenesis-2.4.jar…</em></p>
 <h2 id="编译">编译</h2><p>使用以下命令, 等待约半小时即完成<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;# Build in debug mode&#10;export WEBRTC_DEBUG=true&#10;build_apprtc</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/02/Ubuntu-上下载webrtc-编译android版本/" data-id="cj73c54pb000567waly3y4xox" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/02/Ubuntu-上下载webrtc-编译android版本/" data-id="cj73cjq3e0005hkwa5a26vjt9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebRTC/">WebRTC</a></li></ul>
@@ -196,7 +180,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/19/Android推流在小米4内存上涨问题解决/" data-id="cj73c54pv000o67wa6aldgpxr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/19/Android推流在小米4内存上涨问题解决/" data-id="cj73cjq3x000ohkwat3tik3q0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/live-pusher/">live-pusher</a></li></ul>
@@ -245,7 +229,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/16/使用submodule来管理公共依赖工程/" data-id="cj73c54p2000067wao1lzjvau" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/16/使用submodule来管理公共依赖工程/" data-id="cj73cjq340000hkwa79ip6vx0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -301,7 +285,7 @@ capabilities : {"opengl":true,"accelerometer":true,"touches":true,"keyboard":tru
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/02/Cocos2d-JS-功能点/" data-id="cj73c54pr000l67wa0v5pc9j1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/02/Cocos2d-JS-功能点/" data-id="cj73cjq3t000lhkwaeh13k20a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cocos2d-js/">cocos2d-js</a></li></ul>
@@ -339,7 +323,7 @@ capabilities : {"opengl":true,"accelerometer":true,"touches":true,"keyboard":tru
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/18/JNI/" data-id="cj73c54pg000b67wawc88s1xq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/18/JNI/" data-id="cj73cjq3i000bhkwatc4fs7k7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -377,7 +361,7 @@ capabilities : {"opengl":true,"accelerometer":true,"touches":true,"keyboard":tru
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/06/Userful-site/" data-id="cj73c54pa000467waemmtk4dt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/06/Userful-site/" data-id="cj73cjq3c0004hkwalssc1kaq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -431,7 +415,7 @@ capabilities : {"opengl":true,"accelerometer":true,"touches":true,"keyboard":tru
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/03/上滑收缩下拉展开-分页显示效果的研究/" data-id="cj73c54p8000367waxu4wsvuh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/03/上滑收缩下拉展开-分页显示效果的研究/" data-id="cj73cjq3b0003hkwawmgu8oa7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -493,7 +477,7 @@ lunch后选择默认lunch aosp_arm-eng, 直接确认即可, <span class="built_i
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/03/Building-Android-Source-code/" data-id="cj73c54pt000n67waiys8oasn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/03/Building-Android-Source-code/" data-id="cj73cjq3v000nhkwaj1t6yisa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -534,7 +518,7 @@ lunch后选择默认lunch aosp_arm-eng, 直接确认即可, <span class="built_i
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/09/Design/" data-id="cj73c54pk000f67wa49luwaa4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/09/Design/" data-id="cj73cjq3n000fhkwaoymerw4p" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design/">Design</a></li></ul>
@@ -611,7 +595,7 @@ lunch后选择默认lunch aosp_arm-eng, 直接确认即可, <span class="built_i
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/13/Introduce-me/" data-id="cj73c54ph000c67waf3qzswpr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/13/Introduce-me/" data-id="cj73cjq3j000chkwaj2a9u8ra" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jobs/">Jobs</a></li></ul>
