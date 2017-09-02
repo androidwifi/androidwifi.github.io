@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Ubuntu-上下载webrtc-编译android版本" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/02/Ubuntu-上下载webrtc-编译android版本/" class="article-date">
+  <time datetime="2017-09-02T12:14:50.000Z" itemprop="datePublished">2017-09-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/02/Ubuntu-上下载webrtc-编译android版本/">Ubuntu 上下载webrtc , 编译android版本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="预准备">预准备</h2><p>环境:<br>Linux 4.4.0-79-generic #100-Ubuntu SMP Wed May 17 19:58:14 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux<br>Ubuntu 16.04 LTS</p>
+<p>代理 hosts:<br>更改最新的/etc/hosts<br>连接公司ArrayVPN</p>
+<p>参考文档:<br><a href="https://github.com/androidwifi/webrtc-build-scripts" target="_blank" rel="external">https://github.com/androidwifi/webrtc-build-scripts</a></p>
+<p>解决问题:<br><a href="http://blog.csdn.net/m0_37826678/article/details/73862929" target="_blank" rel="external">http://blog.csdn.net/m0_37826678/article/details/73862929</a><br><a href="https://idom.me/articles/843.html" target="_blank" rel="external">https://idom.me/articles/843.html</a><br><a href="https://segmentfault.com/a/1190000009443082" target="_blank" rel="external">https://segmentfault.com/a/1190000009443082</a><br><a href="https://stackoverflow.com/questions/44800418/gclient-sync-error-no-such-file-or-directory-tmp-tmprcl2od-license-what-is" target="_blank" rel="external">https://stackoverflow.com/questions/44800418/gclient-sync-error-no-such-file-or-directory-tmp-tmprcl2od-license-what-is</a><br><a href="http://www.ithao123.cn/content-8762280.html" target="_blank" rel="external">http://www.ithao123.cn/content-8762280.html</a></p>
+<h2 id="下载">下载</h2><ol>
+<li>下载webrtc-build-scripts, 这一步只要github正常连接即可</li>
+<li>进入webrtc-build-scripts目录, 按照以下指令顺序执行<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># step1 Source all the routines&#10;source android/build.sh&#10;&#10;# step2 Install any dependencies needed&#10;install_dependencies&#10;&#10;# step3 Pull WebRTC&#10;get_webrtc</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>step2可能会遇到问题,<br>issue1:<br>Reading package lists…<br>W: The repository ‘<a href="http://ppa.launchpad.net/n-muench/programs-ppa/ubuntu" target="_blank" rel="external">http://ppa.launchpad.net/n-muench/programs-ppa/ubuntu</a> xenial Release’ does not have a Release file.<br>W: Failed to fetch <a href="https://packagecloud.io/github/git-lfs/ubuntu/dists/xenial/InRelease" target="_blank" rel="external">https://packagecloud.io/github/git-lfs/ubuntu/dists/xenial/InRelease</a>  Connection timed out after 120022 milliseconds<br>E: Failed to fetch <a href="http://ppa.launchpad.net/n-muench/programs-ppa/ubuntu/dists/xenial/main/binary-amd64/Packages" target="_blank" rel="external">http://ppa.launchpad.net/n-muench/programs-ppa/ubuntu/dists/xenial/main/binary-amd64/Packages</a>  404  Not Found<br>W: Some index files failed to download. They have been ignored, or old ones used instead.</p>
+<p>solution:<br>打开software&amp;Updates——&gt;Other Software—-&gt;反选择选项: <a href="http://ppa.launchpad.net/n-muench/programs-ppa/" target="_blank" rel="external">http://ppa.launchpad.net/n-muench/programs-ppa/</a>…<br>再运行source android/build.sh命令</p>
+<p>Step3遇到的问题<br>issue1:<br>CalledProcessError: Command ‘git -c core.deltaBaseCacheLimit=2g clone —no-checkout —progress <a href="https://chromium.googlesource.com/android_tools.git" target="_blank" rel="external">https://chromium.googlesource.com/android_tools.git</a><br>遇到此种问题, 只需要确保代理连上, 重新运行get_webrtc即可.</p>
+<p>issue2: gs域名导致<br>Failed to fetch file gs://chromium-webrtc-resources/2a4617e3497d8faa2fdccfa8964da26499eb13d6 for src/resources/</p>
+<p>solution:<br>手动替换gs://为<a href="https://storage.googleapis.com/" target="_blank" rel="external">https://storage.googleapis.com/</a>, 手动通过以下命令下载:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;wget --no-check-certificate https://storage.googleapis.com/cchromium-webrtc-resources/2a4617e3497d8faa2fdccfa8964da26499eb13d6 -O ./android/webrtc/src/resources/</span><br></pre></td></tr></table></figure></p>
+<p>遇到报错比较多时, 可以通过脚本来执行, 具体脚本(download_helper.py)和执行文件(grep_download_error.log)见以下链接:<br><a href="https://github.com/androidwifi/Utils/tree/master/Python_Downloadwebrtc" target="_blank" rel="external">Batch_DownloadGS</a> 下载</p>
+<p>grep_download_error.log通过下载的download_error.log, 使用以下生成</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat download_error.log | grep &#34;Failed to fetch &#34; &#62; grep_download_error.log</span><br></pre></td></tr></table></figure>
+<p>issue3:<br>0&gt; Failed to fetch file gs://chromium-android-tools/play-services/10.2.0/31843001b7ce94fbdf71f2a9db76b28548a795fa for /tmp/tmpgAjGdp/LICENSE,<br>这个里面的目标路径是个临时的/tmp/tmpgAjGdp/LICENSE,所以需要运行前就更改, 不能使用上面的办法,否则每次都会重新提示这种错误. 原因可能是/etc/hosts中的更改 www.googleapis.com 导致重定向</p>
+<p>Solution:</p>
+<ol>
+<li>修改download_from_google_storage.py, 然后单独使用以下命令单独下载. 注意不能使用step3中的get_webrtc, 否则会提示<br>Error: 20&gt;<br>20&gt;     You have unstaged changes.<br>20&gt;     Please commit, stash, or reset.<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python ./android/webrtc/src/build/android/play_services download --force</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>2.注释掉/etc/hosts中的 .www.googleapis.com 代理, 重新get_webrtc</p>
+<p>最后下载成功, 会提示<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/sqlite4java-0.282.jar…<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/linux-x86/libsqlite4java.so…<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/linux-x86_64/libsqlite4java.so…<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/mac-x86_64/libsqlite4java.jnilib…<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/windows-x86/sqlite4java.dll…<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/windows-x86_64/sqlite4java.dll…<br>Hook ‘/usr/bin/python src/build/android/update_deps/update_third_party_deps.py download -b chromium-sqlite4java -l third_party/sqlite4java’ took 91.55 secs</p>
+<p><strong><em>__</em></strong> running ‘/usr/bin/python src/build/android/update_deps/update_third_party_deps.py download -b chromium-robolectric -l third_party/xstream’ in ‘/media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc’<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/xstream/lib/xstream-1.4.8.jar…<br>Hook ‘/usr/bin/python src/build/android/update_deps/update_third_party_deps.py download -b chromium-robolectric -l third_party/xstream’ took 12.28 secs</p>
+<p><strong><em>__</em></strong> running ‘/usr/bin/python src/build/android/update_deps/update_third_party_deps.py download -b chromium-objenesis -l third_party/objenesis’ in ‘/media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc’<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/objenesis/lib/objenesis-2.4.jar…</p>
+<h2 id="编译">编译</h2><p>使用以下命令, 等待约半小时即完成<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;# Build in debug mode&#10;export WEBRTC_DEBUG=true&#10;build_apprtc</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/02/Ubuntu-上下载webrtc-编译android版本/" data-id="cj73b4r9300065nwastaxz7e3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebRTC/">WebRTC</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/02/hello-world/" class="article-date">
+  <time datetime="2017-09-02T12:12:07.339Z" itemprop="datePublished">2017-09-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/02/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/02/hello-world/" data-id="cj73b4r9100045nwa4swfchz3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Android推流在小米4内存上涨问题解决" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/19/Android推流在小米4内存上涨问题解决/" class="article-date">
+  <time datetime="2017-03-19T13:16:27.000Z" itemprop="datePublished">2017-03-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/19/Android推流在小米4内存上涨问题解决/">Android推流在小米4内存上涨问题解决</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="历史背景">历史背景</h1><p>从16.11开始有QA反馈android推流有内存上涨问题，由于项目排期较紧， 没有时间分析，甚至都没时间调查影响范围，影响面，于是这个问题愈演（传）愈烈，以至于成了集成的障碍。直到17.3月份， 项目需要集成到段子，因为段子用户用android较多，刚好短视频集成SenseAR需要等待，于是顶住排期压力，优先调查这个。</p>
+<h1 id="初步调查">初步调查</h1><p>首先翻看jira：</p>
+<p>ZHIBO-3713 - 【Android】推流端直播十分钟之后，内存一直上涨，详情看附件 Resolved</p>
+<p>ZHIBO-3091 - 【Android】小米4手机推流一个小时左右，内存升高，直播间关掉 Resolved</p>
+<p>两个，其中3713没有列出问题设备信息，只有一个内存上涨，直到涨到一定范围，被系统杀掉， 而且这个过程竟然在短短10分钟之内，顿时感觉问题之严重，马上和相应QA确认和3091是不是都是指同一个设备，确认结果是：都是小米4上的问题，只是bug报的先后问题。</p>
+<p>   半信半疑，根源如背景描述，此问题已经被放大到不能继续集成到段子的地步，怎么可能只有这一台设备有，决定自己确定影响范围，于是找了两个典型的手机：</p>
+<p>   LT29i，4.0.4: 此系统版本低于4.3，只能使用软编，排查软编是否影响；</p>
+<p>   SM－A9100，6.01； 此机配置较高，硬编美颜都开了， 定位硬编是否影响；</p>
+<p>  装上最新的线上火山1.7.4版本，使用内存察看工具，每5s察看一次：</p>
+<p>SM－A9100推流一小时（750个sample＊5s/sample）结果：<br> <img src="Android推流在小米4内存上涨问题解决/SamsungA9100_5s_60min.png" alt="logo"></p>
+<p>分析可见，蓝色的native内存除推流开始和推流结束波动外，大致稳定在30M左右，当然随着手机推流发热，CPU功耗增加，会缓慢增加内存的消耗。大致上比较稳定。</p>
+<p>LT29i大致上类似，保持在25M的内存消耗上，不随时间变化。</p>
+<p>于是， 确定了问题的范围和影响面。</p>
+<h1 id="波折">波折</h1><p>既然这个问题之发生在小米4上， 那只能找对应设备来复现了，由于本项目组没有，正打算从手机租赁公司租一台，被告知公司内部有一台小米4， JIRA bug就是用那台设备报出来的。顺藤摸瓜，从RD手里找到了这台手机，抓紧装了一个线上的火山，开始推流， 同时打开内存监控和log监控， 结果正如bug所描述，内存一直在上涨，从最开始的20M，每次采样均在增加，直到300M左右，被系统杀掉。</p>
+<p>   开始分析Log， 从头到尾挨行检查，居然没有一个fatal， 甚至有用的error信息都没有，直到默默的被系统杀掉， 也是寿终正寝，没留下犯罪现场可查。既然不是普遍问题，走查代码就无效，因为要是代码本身的逻辑问题，就不止一个手机又问题了，至少也应该是偶现，不会像目前诡异现象： mi4必先，其他必不现。</p>
+<p>  开始转换思路： 到stackoverflow上找是否有有用内存分析工具， 果然发现了一个有用的工具，但是需要root权限。公司android机大部分都没有甚至也没法root， 正打算把这个mi4 root后用工具大干一场师，忽然发现这个Mi4居然是root过的。 </p>
+<p>  高兴之余，忽然一个想法闪过， 既然这个手机已经被root过了，那么理论上任何操作都能施加在其上面，会不会某些配置或则系统库被篡改过？？？？ 要不要还原成用户那边的出厂时的状态再来分析？？？？？</p>
+<p> 但是， 这个想法马上一闪而过，原因很简单： 这个调查范围太广了，究竟哪些系统配置被改了呢， 不清楚。。。，还是按照工具扎扎实实的分析吧， 按照工具要求，先host上交叉编译好可执行文件， 推送到手机系统目录，重启手机。</p>
+<p> 可是Mi4无法启动了，等了一下午都没启动，各种办法都不行， 没办法，只能刷机了， 安装好刷机工具， 到官网找用户端一样的ROM：<br><a href="http://www.miui.com/shuaji-393.html" target="_blank" rel="external">通用线刷教程</a> 中下载<a href="http://update.miui.com/updates/v1/fullromdownload.php?d=cancro&amp;b=X&amp;r=cn&amp;n=" target="_blank" rel="external">小米手机4 CDMA/WCDMA/TD-LTE 最新 开发版 线刷Fastboot完整包点击下载</a></p>
+<p>   刷完后参数：MIUI8.2; 6.0.1 MMB29M; 3.4.0-gf4b741d-00628-gabe801a </p>
+<p>  刷好后解决各种奇葩问题： 联网，安装线上包，无法直播（恰逢账号被攻击）。。。。，最后使用hot_fix编译出来的release包， 在沙盒环境下继续验证问题。 结果同一台手机，同样版本，内存居然稳定了下来（缓慢增加时手机发热导致，属正常现象）：<br>  <img src="Android推流在小米4内存上涨问题解决/mi4_flashed.png" alt="logo"></p>
+<h1 id="总结原因">总结原因</h1><p> 经过上面的分析， 得出的结论是： root过的Mi4， 可能已经在开发过程参数配置或则系统库已经被修改，导致native分配的内存无法得到回收； 或则是小米系统自己做了配置，只要root过， 就不再为释放。</p>
+<p> 总之， 这种已经更改出厂默认系统的场景将会导致不可控情况， 但是用户大多数都不会这么做， 也就没有这个问题（就算有发烧机油，他们也会再刷回去）。 </p>
+<p> 所以，这个问题已经分析解决了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/19/Android推流在小米4内存上涨问题解决/" data-id="cj73b4r9n000p5nwa9jcisr7k" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/live-pusher/">live-pusher</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-使用submodule来管理公共依赖工程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/16/使用submodule来管理公共依赖工程/" class="article-date">
+  <time datetime="2015-12-16T07:52:44.000Z" itemprop="datePublished">2015-12-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/16/使用submodule来管理公共依赖工程/">使用submodule来管理公共依赖工程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="(一)_为工程添加公共依赖模块">(一)  为工程添加公共依赖模块</h2><p>git submodule add 公共仓库地址 本地相对路径<br>比如:<br>git submodule add  ssh://git@gitlab.changbaops.com:10204/Android/CommonModule.git  libs<br>添加公共模块的目录libs</p>
+<h2 id="(二)_clone带有公共依赖模块的工程">(二)  clone带有公共依赖模块的工程</h2><p>git clone —recursive 工程git路径</p>
+<p>比如:<br>git clone —recursive ssh://git@gitlab.changbaops.com:10204/Android/AndroidTestProject1.git</p>
+<h2 id="(三)_pull带有公共依赖模块的工程">(三)  pull带有公共依赖模块的工程</h2><p>在使用git pull后更新非公共模块代码后再加上以下命令:<br>git submodule init<br>git submodule update<br>git submodule foreach git pull</p>
+<h2 id="(四)_在引用公共模块工程中修改公共模块">(四)  在引用公共模块工程中修改公共模块</h2><p>此过程分两步:</p>
+<ol>
+<li>进入每个公共模块的根路径下(有.git文件的目录), 切换到需要修改的分支,(默认是Not currently on any branch), 然后使用正常的git add; git commit; git push等修改后提交</li>
+<li>退到引用公共模块本身工程的跟路径下(有.git文件夹的目录)使用以下命令来更新引用submodule的commit id<br>git add -u</li>
+</ol>
+<p>// # -m后可以换成任意信息<br>git commit -m “update common lib to lastest commit id”</p>
+<p>// # 特定分支需要加上分支名, 默认master<br>git push </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/12/16/使用submodule来管理公共依赖工程/" data-id="cj73b4r8s00005nwa99jp75qs" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Cocos2d-JS-功能点" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/02/Cocos2d-JS-功能点/" class="article-date">
+  <time datetime="2015-12-02T03:50:26.000Z" itemprop="datePublished">2015-12-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/02/Cocos2d-JS-功能点/">Cocos2d-JS 功能点</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-_获取系统信息:">1. 获取系统信息:</h1><pre><code><span class="keyword">cc</span>.<span class="literal">log</span>(<span class="string">"platform1=%s"</span>, <span class="keyword">cc</span>.sys.os);<span class="comment">// output: Android</span>
+<span class="keyword">cc</span>.<span class="literal">log</span>(<span class="string">"platform2=%s"</span>, <span class="keyword">cc</span>.sys.platform); <span class="comment">// output: 3</span>
+<span class="keyword">cc</span>.<span class="literal">log</span>(<span class="string">"android=%s, ios = %s, windows=%s"</span>,  <span class="keyword">cc</span>.sys.OS_ANDROID, <span class="keyword">cc</span>.sys.OS_IOS, <span class="keyword">cc</span>.sys.OS_WINDOWS);
+<span class="keyword">if</span> (<span class="keyword">cc</span>.sys.os == <span class="keyword">cc</span>.sys.OS_ANDROID) {
+    <span class="comment">// "Android" platform</span>
+} <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">cc</span>.sys.os == <span class="keyword">cc</span>.sys.OS_IOS) {
+    <span class="comment">// "iOS" platform</span>
+} <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">cc</span>.sys.os == <span class="keyword">cc</span>.sys.OS_WINDOWS) {
+    <span class="comment">// "Windows" platform</span>
+}
+
+<span class="keyword">cc</span>.sys.dump();
+<span class="comment">/*
+isMobile : true
+language : en
+browserType : null
+capabilities : {"opengl":true,"accelerometer":true,"touches":true,"keyboard":true}
+*/</span>
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/12/02/Cocos2d-JS-功能点/" data-id="cj73b4r9j000m5nwazg6c4vz6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cocos2d-js/">cocos2d-js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JNI" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/18/JNI/" class="article-date">
+  <time datetime="2015-10-18T11:23:42.000Z" itemprop="datePublished">2015-10-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/18/JNI/">JNI</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/18/JNI/" data-id="cj73b4r98000c5nwa1hgrpk7w" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Userful-site" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/06/Userful-site/" class="article-date">
+  <time datetime="2015-10-05T17:46:58.000Z" itemprop="datePublished">2015-10-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/06/Userful-site/">Userful site</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Android_Related">Android Related</h1><p>Android developer latest news:<br><a href="http://android-developers.blogspot.sg/2015/09/android-studio-14.html" target="_blank" rel="external">http://android-developers.blogspot.sg/2015/09/android-studio-14.html</a><br><a href="https://android.googlesource.com/platform/build/" target="_blank" rel="external">https://android.googlesource.com/platform/build/</a></p>
+<h1 id="Android_tools_site">Android tools site</h1><p><a href="https://sites.google.com/a/android.com/tools/" target="_blank" rel="external">https://sites.google.com/a/android.com/tools/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/06/Userful-site/" data-id="cj73b4r9200055nwa0wxn5w1a" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-上滑收缩下拉展开-分页显示效果的研究" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/03/上滑收缩下拉展开-分页显示效果的研究/" class="article-date">
+  <time datetime="2015-10-03T13:59:06.000Z" itemprop="datePublished">2015-10-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/03/上滑收缩下拉展开-分页显示效果的研究/">上滑收缩下拉展开, 分页显示效果的研究</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="上滑收缩下拉展开,_且使用viewpager展开效果的研究">上滑收缩下拉展开, 且使用viewpager展开效果的研究</h1><p>尝试了不同的方案, 具体如下:</p>
+<ul>
+<li>Scrollvie中的onScroll时刻调用onLayout</li>
+<li>自定义最外层滑动效果的parent view</li>
+<li>使用Material Design Suppport中的控件</li>
+</ul>
+<h2 id="1-_Scrollvie中的onScroll时刻调用onLayout">1.  Scrollvie中的onScroll时刻调用onLayout</h2><p>  参考: <a href="http://blog.csdn.net/xiaanming/article/details/17761431/" target="_blank" rel="external">http://blog.csdn.net/xiaanming/article/details/17761431/</a></p>
+<p>未解决部分: 当scrollview中含有Viewpager, 每个viewpager又是fragment时. 需要重写onMeaseure来设置scrollview的高度, 比较难实现.</p>
+<h2 id="2-_自定义最外层滑动效果的view—-OverlappingPaneLayout">2. 自定义最外层滑动效果的view—-OverlappingPaneLayout</h2><p>OverlappingPaneLayout内部包含Framelayout<br>此控件实现NestedScrollingParent(onStartNestedScroll,  onNestedPreScroll, onNestedPreFling, onNestedScroll, onStopNestedScroll)父类的方法, 里面的子控件需要实现NestedScrollingChild对应的子方法,  5.0以后原生系统支持.</p>
+<blockquote>
+<p>From what I can tell, both ListView (AbsListView) and ScrollView support this now (if running on API 21), but it must be enabled on the scrolling views.<br>There are two ways, by calling setNestedScrollingEnabled(true) or with the layout attribute android:nestedScrollingEnabled=”true” (which is undocumented)</p>
+</blockquote>
+<p>低于5.0版本需要继承,实现对应方法. 参考:<br><a href="http://segmentfault.com/a/1190000002873657" target="_blank" rel="external">http://segmentfault.com/a/1190000002873657</a></p>
+<p>未完善部分: 当子控件是PullRefreshListView时, 需要对基类实现NestedScrollingChild的方法, 有部分卡顿和不灵敏问题.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">com.android.dialer.widget.OverlappingPaneLayout</span></span><br><span class="line">    <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attribute">android:id</span>=<span class="value">"@+id/lists_frame"</span></span><br><span class="line">    <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">    <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">    <span class="attribute">android:animateLayoutChanges</span>=<span class="value">"true"</span> &gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">ListView</span></span><br><span class="line">        <span class="attribute">android:id</span>=<span class="value">"@+id/shortcut_card_list"</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:paddingTop</span>=<span class="value">"@dimen/action_bar_height_large"</span></span><br><span class="line">        <span class="attribute">android:background</span>=<span class="value">"@color/actionbar_background_color"</span></span><br><span class="line">        <span class="attribute">android:clipToPadding</span>=<span class="value">"false"</span></span><br><span class="line">        <span class="attribute">android:fadingEdge</span>=<span class="value">"none"</span></span><br><span class="line">        <span class="attribute">android:divider</span>=<span class="value">"@null"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">FrameLayout</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="title">LinearLayout</span></span><br><span class="line">            <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">            <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">            <span class="attribute">android:orientation</span>=<span class="value">"vertical"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="title">com.android.contacts.common.list.ViewPagerTabs</span></span><br><span class="line">                <span class="attribute">android:id</span>=<span class="value">"@+id/lists_pager_header"</span></span><br><span class="line">                <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">                <span class="attribute">android:layout_height</span>=<span class="value">"@dimen/tab_height"</span></span><br><span class="line">                <span class="attribute">android:textAllCaps</span>=<span class="value">"true"</span></span><br><span class="line">                <span class="attribute">android:orientation</span>=<span class="value">"horizontal"</span></span><br><span class="line">                <span class="attribute">android:layout_gravity</span>=<span class="value">"top"</span></span><br><span class="line">                <span class="attribute">android:elevation</span>=<span class="value">"@dimen/tab_elevation"</span></span><br><span class="line">                <span class="attribute">style</span>=<span class="value">"@style/DialtactsActionBarTabTextStyle"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="title">android.support.v4.view.ViewPager</span></span><br><span class="line">                <span class="attribute">android:id</span>=<span class="value">"@+id/lists_pager"</span></span><br><span class="line">                <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">                <span class="attribute">android:layout_height</span>=<span class="value">"0dp"</span></span><br><span class="line">                <span class="attribute">android:layout_weight</span>=<span class="value">"1"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="title">com.android.dialer.list.RemoveView</span></span><br><span class="line">            <span class="attribute">android:id</span>=<span class="value">"@+id/remove_view"</span></span><br><span class="line">            <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">            <span class="attribute">android:layout_height</span>=<span class="value">"@dimen/tab_height"</span></span><br><span class="line">            <span class="attribute">android:layout_alignParentTop</span>=<span class="value">"true"</span> &gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="title">LinearLayout</span></span><br><span class="line">                <span class="attribute">android:id</span>=<span class="value">"@+id/remove_view_content"</span></span><br><span class="line">                <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">                <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">                <span class="attribute">android:background</span>=<span class="value">"@color/actionbar_background_color"</span></span><br><span class="line">                <span class="attribute">android:gravity</span>=<span class="value">"center"</span></span><br><span class="line">                <span class="attribute">android:orientation</span>=<span class="value">"horizontal"</span></span><br><span class="line">                <span class="attribute">android:visibility</span>=<span class="value">"gone"</span> &gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="title">ImageView</span></span><br><span class="line">                    <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span></span><br><span class="line">                    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">                    <span class="attribute">android:layout_marginTop</span>=<span class="value">"8dp"</span></span><br><span class="line">                    <span class="attribute">android:layout_marginBottom</span>=<span class="value">"8dp"</span></span><br><span class="line">                    <span class="attribute">android:id</span>=<span class="value">"@+id/remove_view_icon"</span></span><br><span class="line">                    <span class="attribute">android:src</span>=<span class="value">"@drawable/ic_remove"</span></span><br><span class="line">                    <span class="attribute">android:contentDescription</span>=<span class="value">"@string/remove_contact"</span></span><br><span class="line">                    <span class="attribute">android:tint</span>=<span class="value">"@color/remove_text_color"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="title">TextView</span></span><br><span class="line">                    <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span></span><br><span class="line">                    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">                    <span class="attribute">android:id</span>=<span class="value">"@+id/remove_view_text"</span></span><br><span class="line">                    <span class="attribute">android:textSize</span>=<span class="value">"@dimen/remove_text_size"</span></span><br><span class="line">                    <span class="attribute">android:textColor</span>=<span class="value">"@color/remove_text_color"</span></span><br><span class="line">                    <span class="attribute">android:text</span>=<span class="value">"@string/remove_contact"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="title">com.android.dialer.list.RemoveView</span> &gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="title">FrameLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">com.android.dialer.widget.OverlappingPaneLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>参考:<br><a href="https://android.googlesource.com/platform/packages/apps/Dialer" target="_blank" rel="external">https://android.googlesource.com/platform/packages/apps/Dialer</a><br><a href="https://android.googlesource.com/platform/packages/apps/ContactsCommon" target="_blank" rel="external">https://android.googlesource.com/platform/packages/apps/ContactsCommon</a></p>
+<h2 id="3-_使用Material_Design_Suppport中的控件">3. 使用Material Design Suppport中的控件</h2><p>参考:<br><a href="https://github.com/yanbober/Android-Blog-Source/tree/master/Support-Library-Demo" target="_blank" rel="external">https://github.com/yanbober/Android-Blog-Source/tree/master/Support-Library-Demo</a></p>
+<p>需要扩展SwipeRefreshLayout<br><a href="https://github.com/androidwifi/SuperSwipeRefreshLayout" target="_blank" rel="external">https://github.com/androidwifi/SuperSwipeRefreshLayout</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/03/上滑收缩下拉展开-分页显示效果的研究/" data-id="cj73b4r8z00035nwatzf4133k" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Building-Android-Source-code" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/03/Building-Android-Source-code/" class="article-date">
+  <time datetime="2015-10-03T05:15:19.000Z" itemprop="datePublished">2015-10-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/03/Building-Android-Source-code/">Building Android Source code</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Environment:<br>Ubuntu 14.04<br>FS:  Windows NTFS Hard Disk shared by linux</p>
+<h1 id="Downloading_源码">Downloading 源码</h1><pre><code>翻墙后安装Repo, 按照官网连接下载即可
+</code></pre><p>  <a href="https://source.android.com/source/downloading.html" target="_blank" rel="external">https://source.android.com/source/downloading.html</a><br>  没有-b选项, 默认是master分支下载的</p>
+<p>   遇到的问题, 存储目录在一个windows 下的NTFS文件系统中,<br>   有个frameworks/compile/slang/tests/P_str_escape/str\escape.rs文件, 无<br>    法下载到NTFS的硬盘上, 无论是手动copy还是git下载<br>  Solution: move下载部分的源码文件到ext2的linux下, 下载完剩余的部分, 删<br>   除掉那个文件, 再move回windows下.</p>
+<p>   下载后大小36G</p>
+<h1 id="Building_source_code">Building source code</h1><pre><code>按照官网: https:<span class="comment">//source.android.com/source/building.html</span>
+lunch后选择默认lunch aosp_arm-eng, 直接确认即可, <span class="built_in">make</span> -j4
+</code></pre><p>  遇到的问题</p>
+<ul>
+<li><p>5.1.1_r18只支持1.7的java版本, 本机安装的是1.8的<br>  Solution: 下载最新的jdk-7u79-linux-x64.tar.gz, 解压move到/usr/lib/dvm下, 使用sudo update-alternatives install java (javac)安装1.7, 并且注释掉系统的环境变量/etc/environment, /etc/profile中指定的JAVA_HOME, 更改为1.7的路径</p>
+</li>
+<li><p>javadoc, jar等无法找到命令<br> Solution: 进入/usr/bin目录, 和真正的1.7文件中的建立一个软链接, ln -s /usr/lib/dvm/…</p>
+</li>
+<li><p>android编译错误:/bin/bash: gperf: command not found<br>  Solution: apt-get install gperf安装即可</p>
+</li>
+<li><p>有些错误没有直接提示原因, 意外终止<br>  Solution:  重新make即可忽略</p>
+</li>
+<li><p>OSError: [Errno 2] No such file or directory<br>make:  /home/odexcide/android-4./out/target/product/generic/obj/GYP/shared_intermediates/ui/gl/jni/Surface_jni.h  Error 1<br>make: <em>*</em> Waiting for unfinished jobs..<br>  Solution: 使用 sudo update-alternatives —config javap 查看指向，选择合适的版本，如果不存在，则添加javap sudo update-alternatives —install /usr/bin/javap javap /usr/lib/jvm/jdk1.6.0_45/bin/javap 300<br>配置 sudo update-alternatives —config javap 注：如果只有一个可选的话，则不会列表，即无需处理<br>reference: <a href="http://www.cnblogs.com/rainduck/p/3718227.html" target="_blank" rel="external">http://www.cnblogs.com/rainduck/p/3718227.html</a></p>
+</li>
+<li><p>touch: setting times of `out/target/product/tf700t/obj/PACKAGING/updater_extensions_intermediates/register.inc.dep.’: No such file or directory<br>make: <em>*</em> [out/target/product/tf700t/obj/PACKAGING/updater_extensions_intermediates/register.inc.dep.] Error 1<br> Solution: 没有找到相关的错误原因, 恰巧误删了build文件夹, 重新在ext2下载了个copy进去, 重启后, 删除out文件夹, 重新编译选择lunch aosp_hammerhead-userdebug;make -j4错误自然消失.</p>
+</li>
+</ul>
+<p>最后编译成功后会提示:</p>
+<blockquote>
+<p>make completed successfully (04:33:58 (hh:mm:ss))</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/03/Building-Android-Source-code/" data-id="cj73b4r9l000o5nwaldlzusp5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Design" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/08/09/Design/" class="article-date">
+  <time datetime="2015-08-09T02:07:35.000Z" itemprop="datePublished">2015-08-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/09/Design/">Android Databinding</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[Transfer]Android Databinding: Goodbye Presenter, hello ViewModel!<br><a href="http://tech.vg.no/2015/07/17/android-databinding-goodbye-presenter-hello-viewmodel/">Original</a><br>
+        
+          <p class="article-more-link">
+            <a href="/2015/08/09/Design/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/09/Design/" data-id="cj73b4r9e000g5nwalja8o998" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design/">Design</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
+  
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/">Design</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jobs/">Jobs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebRTC/">WebRTC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocos2d-js/">cocos2d-js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/live-pusher/">live-pusher</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Design/" style="font-size: 10px;">Design</a><a href="/tags/Git/" style="font-size: 10px;">Git</a><a href="/tags/Jobs/" style="font-size: 20px;">Jobs</a><a href="/tags/WebRTC/" style="font-size: 10px;">WebRTC</a><a href="/tags/cocos2d-js/" style="font-size: 20px;">cocos2d-js</a><a href="/tags/live-pusher/" style="font-size: 10px;">live-pusher</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/09/02/Ubuntu-上下载webrtc-编译android版本/">Ubuntu 上下载webrtc , 编译android版本</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/19/Android推流在小米4内存上涨问题解决/">Android推流在小米4内存上涨问题解决</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/16/使用submodule来管理公共依赖工程/">使用submodule来管理公共依赖工程</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/02/Cocos2d-JS-功能点/">Cocos2d-JS 功能点</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

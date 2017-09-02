@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android推流在小米4内存上涨问题解决 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="历史背景从16.11开始有QA反馈android推流有内存上涨问题，由于项目排期较紧， 没有时间分析，甚至都没时间调查影响范围，影响面，于是这个问题愈演（传）愈烈，以至于成了集成的障碍。直到17.3月份， 项目需要集成到段子，因为段子用户用android较多，刚好短视频集成SenseAR需要等待，于是顶住排期压力，优先调查这个。
+初步调查首先翻看jira：
+ZHIBO-3713 - 【Androi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android推流在小米4内存上涨问题解决">
+<meta property="og:url" content="http://yoursite.com/2017/03/19/Android推流在小米4内存上涨问题解决/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="历史背景从16.11开始有QA反馈android推流有内存上涨问题，由于项目排期较紧， 没有时间分析，甚至都没时间调查影响范围，影响面，于是这个问题愈演（传）愈烈，以至于成了集成的障碍。直到17.3月份， 项目需要集成到段子，因为段子用户用android较多，刚好短视频集成SenseAR需要等待，于是顶住排期压力，优先调查这个。
+初步调查首先翻看jira：
+ZHIBO-3713 - 【Androi">
+<meta property="og:image" content="Android推流在小米4内存上涨问题解决/SamsungA9100_5s_60min.png">
+<meta property="og:image" content="Android推流在小米4内存上涨问题解决/mi4_flashed.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android推流在小米4内存上涨问题解决">
+<meta name="twitter:description" content="历史背景从16.11开始有QA反馈android推流有内存上涨问题，由于项目排期较紧， 没有时间分析，甚至都没时间调查影响范围，影响面，于是这个问题愈演（传）愈烈，以至于成了集成的障碍。直到17.3月份， 项目需要集成到段子，因为段子用户用android较多，刚好短视频集成SenseAR需要等待，于是顶住排期压力，优先调查这个。
+初步调查首先翻看jira：
+ZHIBO-3713 - 【Androi">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Android推流在小米4内存上涨问题解决" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/19/Android推流在小米4内存上涨问题解决/" class="article-date">
+  <time datetime="2017-03-19T13:16:27.000Z" itemprop="datePublished">2017-03-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android推流在小米4内存上涨问题解决
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="历史背景">历史背景</h1><p>从16.11开始有QA反馈android推流有内存上涨问题，由于项目排期较紧， 没有时间分析，甚至都没时间调查影响范围，影响面，于是这个问题愈演（传）愈烈，以至于成了集成的障碍。直到17.3月份， 项目需要集成到段子，因为段子用户用android较多，刚好短视频集成SenseAR需要等待，于是顶住排期压力，优先调查这个。</p>
+<h1 id="初步调查">初步调查</h1><p>首先翻看jira：</p>
+<p>ZHIBO-3713 - 【Android】推流端直播十分钟之后，内存一直上涨，详情看附件 Resolved</p>
+<p>ZHIBO-3091 - 【Android】小米4手机推流一个小时左右，内存升高，直播间关掉 Resolved</p>
+<p>两个，其中3713没有列出问题设备信息，只有一个内存上涨，直到涨到一定范围，被系统杀掉， 而且这个过程竟然在短短10分钟之内，顿时感觉问题之严重，马上和相应QA确认和3091是不是都是指同一个设备，确认结果是：都是小米4上的问题，只是bug报的先后问题。</p>
+<p>   半信半疑，根源如背景描述，此问题已经被放大到不能继续集成到段子的地步，怎么可能只有这一台设备有，决定自己确定影响范围，于是找了两个典型的手机：</p>
+<p>   LT29i，4.0.4: 此系统版本低于4.3，只能使用软编，排查软编是否影响；</p>
+<p>   SM－A9100，6.01； 此机配置较高，硬编美颜都开了， 定位硬编是否影响；</p>
+<p>  装上最新的线上火山1.7.4版本，使用内存察看工具，每5s察看一次：</p>
+<p>SM－A9100推流一小时（750个sample＊5s/sample）结果：<br> <img src="Android推流在小米4内存上涨问题解决/SamsungA9100_5s_60min.png" alt="logo"></p>
+<p>分析可见，蓝色的native内存除推流开始和推流结束波动外，大致稳定在30M左右，当然随着手机推流发热，CPU功耗增加，会缓慢增加内存的消耗。大致上比较稳定。</p>
+<p>LT29i大致上类似，保持在25M的内存消耗上，不随时间变化。</p>
+<p>于是， 确定了问题的范围和影响面。</p>
+<h1 id="波折">波折</h1><p>既然这个问题之发生在小米4上， 那只能找对应设备来复现了，由于本项目组没有，正打算从手机租赁公司租一台，被告知公司内部有一台小米4， JIRA bug就是用那台设备报出来的。顺藤摸瓜，从RD手里找到了这台手机，抓紧装了一个线上的火山，开始推流， 同时打开内存监控和log监控， 结果正如bug所描述，内存一直在上涨，从最开始的20M，每次采样均在增加，直到300M左右，被系统杀掉。</p>
+<p>   开始分析Log， 从头到尾挨行检查，居然没有一个fatal， 甚至有用的error信息都没有，直到默默的被系统杀掉， 也是寿终正寝，没留下犯罪现场可查。既然不是普遍问题，走查代码就无效，因为要是代码本身的逻辑问题，就不止一个手机又问题了，至少也应该是偶现，不会像目前诡异现象： mi4必先，其他必不现。</p>
+<p>  开始转换思路： 到stackoverflow上找是否有有用内存分析工具， 果然发现了一个有用的工具，但是需要root权限。公司android机大部分都没有甚至也没法root， 正打算把这个mi4 root后用工具大干一场师，忽然发现这个Mi4居然是root过的。 </p>
+<p>  高兴之余，忽然一个想法闪过， 既然这个手机已经被root过了，那么理论上任何操作都能施加在其上面，会不会某些配置或则系统库被篡改过？？？？ 要不要还原成用户那边的出厂时的状态再来分析？？？？？</p>
+<p> 但是， 这个想法马上一闪而过，原因很简单： 这个调查范围太广了，究竟哪些系统配置被改了呢， 不清楚。。。，还是按照工具扎扎实实的分析吧， 按照工具要求，先host上交叉编译好可执行文件， 推送到手机系统目录，重启手机。</p>
+<p> 可是Mi4无法启动了，等了一下午都没启动，各种办法都不行， 没办法，只能刷机了， 安装好刷机工具， 到官网找用户端一样的ROM：<br><a href="http://www.miui.com/shuaji-393.html" target="_blank" rel="external">通用线刷教程</a> 中下载<a href="http://update.miui.com/updates/v1/fullromdownload.php?d=cancro&amp;b=X&amp;r=cn&amp;n=" target="_blank" rel="external">小米手机4 CDMA/WCDMA/TD-LTE 最新 开发版 线刷Fastboot完整包点击下载</a></p>
+<p>   刷完后参数：MIUI8.2; 6.0.1 MMB29M; 3.4.0-gf4b741d-00628-gabe801a </p>
+<p>  刷好后解决各种奇葩问题： 联网，安装线上包，无法直播（恰逢账号被攻击）。。。。，最后使用hot_fix编译出来的release包， 在沙盒环境下继续验证问题。 结果同一台手机，同样版本，内存居然稳定了下来（缓慢增加时手机发热导致，属正常现象）：<br>  <img src="Android推流在小米4内存上涨问题解决/mi4_flashed.png" alt="logo"></p>
+<h1 id="总结原因">总结原因</h1><p> 经过上面的分析， 得出的结论是： root过的Mi4， 可能已经在开发过程参数配置或则系统库已经被修改，导致native分配的内存无法得到回收； 或则是小米系统自己做了配置，只要root过， 就不再为释放。</p>
+<p> 总之， 这种已经更改出厂默认系统的场景将会导致不可控情况， 但是用户大多数都不会这么做， 也就没有这个问题（就算有发烧机油，他们也会再刷回去）。 </p>
+<p> 所以，这个问题已经分析解决了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/19/Android推流在小米4内存上涨问题解决/" data-id="cj73b4r9n000p5nwa9jcisr7k" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/live-pusher/">live-pusher</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/09/02/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/16/使用submodule来管理公共依赖工程/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">使用submodule来管理公共依赖工程</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/">Design</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jobs/">Jobs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebRTC/">WebRTC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocos2d-js/">cocos2d-js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/live-pusher/">live-pusher</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Design/" style="font-size: 10px;">Design</a><a href="/tags/Git/" style="font-size: 10px;">Git</a><a href="/tags/Jobs/" style="font-size: 20px;">Jobs</a><a href="/tags/WebRTC/" style="font-size: 10px;">WebRTC</a><a href="/tags/cocos2d-js/" style="font-size: 20px;">cocos2d-js</a><a href="/tags/live-pusher/" style="font-size: 10px;">live-pusher</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/09/02/Ubuntu-上下载webrtc-编译android版本/">Ubuntu 上下载webrtc , 编译android版本</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/19/Android推流在小米4内存上涨问题解决/">Android推流在小米4内存上涨问题解决</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/16/使用submodule来管理公共依赖工程/">使用submodule来管理公共依赖工程</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/02/Cocos2d-JS-功能点/">Cocos2d-JS 功能点</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

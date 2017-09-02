@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Ubuntu 上下载webrtc , 编译android版本 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="预准备环境:Linux 4.4.0-79-generic #100-Ubuntu SMP Wed May 17 19:58:14 UTC 2017 x86_64 x86_64 x86_64 GNU/LinuxUbuntu 16.04 LTS
+代理 hosts:更改最新的/etc/hosts连接公司ArrayVPN
+参考文档:https://github.com/androidwifi/webrtc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu 上下载webrtc , 编译android版本">
+<meta property="og:url" content="http://yoursite.com/2017/09/02/Ubuntu-上下载webrtc-编译android版本/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="预准备环境:Linux 4.4.0-79-generic #100-Ubuntu SMP Wed May 17 19:58:14 UTC 2017 x86_64 x86_64 x86_64 GNU/LinuxUbuntu 16.04 LTS
+代理 hosts:更改最新的/etc/hosts连接公司ArrayVPN
+参考文档:https://github.com/androidwifi/webrtc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ubuntu 上下载webrtc , 编译android版本">
+<meta name="twitter:description" content="预准备环境:Linux 4.4.0-79-generic #100-Ubuntu SMP Wed May 17 19:58:14 UTC 2017 x86_64 x86_64 x86_64 GNU/LinuxUbuntu 16.04 LTS
+代理 hosts:更改最新的/etc/hosts连接公司ArrayVPN
+参考文档:https://github.com/androidwifi/webrtc">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Ubuntu-上下载webrtc-编译android版本" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/02/Ubuntu-上下载webrtc-编译android版本/" class="article-date">
+  <time datetime="2017-09-02T12:14:50.000Z" itemprop="datePublished">2017-09-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Ubuntu 上下载webrtc , 编译android版本
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="预准备">预准备</h2><p>环境:<br>Linux 4.4.0-79-generic #100-Ubuntu SMP Wed May 17 19:58:14 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux<br>Ubuntu 16.04 LTS</p>
+<p>代理 hosts:<br>更改最新的/etc/hosts<br>连接公司ArrayVPN</p>
+<p>参考文档:<br><a href="https://github.com/androidwifi/webrtc-build-scripts" target="_blank" rel="external">https://github.com/androidwifi/webrtc-build-scripts</a></p>
+<p>解决问题:<br><a href="http://blog.csdn.net/m0_37826678/article/details/73862929" target="_blank" rel="external">http://blog.csdn.net/m0_37826678/article/details/73862929</a><br><a href="https://idom.me/articles/843.html" target="_blank" rel="external">https://idom.me/articles/843.html</a><br><a href="https://segmentfault.com/a/1190000009443082" target="_blank" rel="external">https://segmentfault.com/a/1190000009443082</a><br><a href="https://stackoverflow.com/questions/44800418/gclient-sync-error-no-such-file-or-directory-tmp-tmprcl2od-license-what-is" target="_blank" rel="external">https://stackoverflow.com/questions/44800418/gclient-sync-error-no-such-file-or-directory-tmp-tmprcl2od-license-what-is</a><br><a href="http://www.ithao123.cn/content-8762280.html" target="_blank" rel="external">http://www.ithao123.cn/content-8762280.html</a></p>
+<h2 id="下载">下载</h2><ol>
+<li>下载webrtc-build-scripts, 这一步只要github正常连接即可</li>
+<li>进入webrtc-build-scripts目录, 按照以下指令顺序执行<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># step1 Source all the routines&#10;source android/build.sh&#10;&#10;# step2 Install any dependencies needed&#10;install_dependencies&#10;&#10;# step3 Pull WebRTC&#10;get_webrtc</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>step2可能会遇到问题,<br>issue1:<br>Reading package lists…<br>W: The repository ‘<a href="http://ppa.launchpad.net/n-muench/programs-ppa/ubuntu" target="_blank" rel="external">http://ppa.launchpad.net/n-muench/programs-ppa/ubuntu</a> xenial Release’ does not have a Release file.<br>W: Failed to fetch <a href="https://packagecloud.io/github/git-lfs/ubuntu/dists/xenial/InRelease" target="_blank" rel="external">https://packagecloud.io/github/git-lfs/ubuntu/dists/xenial/InRelease</a>  Connection timed out after 120022 milliseconds<br>E: Failed to fetch <a href="http://ppa.launchpad.net/n-muench/programs-ppa/ubuntu/dists/xenial/main/binary-amd64/Packages" target="_blank" rel="external">http://ppa.launchpad.net/n-muench/programs-ppa/ubuntu/dists/xenial/main/binary-amd64/Packages</a>  404  Not Found<br>W: Some index files failed to download. They have been ignored, or old ones used instead.</p>
+<p>solution:<br>打开software&amp;Updates——&gt;Other Software—-&gt;反选择选项: <a href="http://ppa.launchpad.net/n-muench/programs-ppa/" target="_blank" rel="external">http://ppa.launchpad.net/n-muench/programs-ppa/</a>…<br>再运行source android/build.sh命令</p>
+<p>Step3遇到的问题<br>issue1:<br>CalledProcessError: Command ‘git -c core.deltaBaseCacheLimit=2g clone —no-checkout —progress <a href="https://chromium.googlesource.com/android_tools.git" target="_blank" rel="external">https://chromium.googlesource.com/android_tools.git</a><br>遇到此种问题, 只需要确保代理连上, 重新运行get_webrtc即可.</p>
+<p>issue2: gs域名导致<br>Failed to fetch file gs://chromium-webrtc-resources/2a4617e3497d8faa2fdccfa8964da26499eb13d6 for src/resources/</p>
+<p>solution:<br>手动替换gs://为<a href="https://storage.googleapis.com/" target="_blank" rel="external">https://storage.googleapis.com/</a>, 手动通过以下命令下载:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;wget --no-check-certificate https://storage.googleapis.com/cchromium-webrtc-resources/2a4617e3497d8faa2fdccfa8964da26499eb13d6 -O ./android/webrtc/src/resources/</span><br></pre></td></tr></table></figure></p>
+<p>遇到报错比较多时, 可以通过脚本来执行, 具体脚本(download_helper.py)和执行文件(grep_download_error.log)见以下链接:<br><a href="https://github.com/androidwifi/Utils/tree/master/Python_Downloadwebrtc" target="_blank" rel="external">Batch_DownloadGS</a> 下载</p>
+<p>grep_download_error.log通过下载的download_error.log, 使用以下生成</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat download_error.log | grep &#34;Failed to fetch &#34; &#62; grep_download_error.log</span><br></pre></td></tr></table></figure>
+<p>issue3:<br>0&gt; Failed to fetch file gs://chromium-android-tools/play-services/10.2.0/31843001b7ce94fbdf71f2a9db76b28548a795fa for /tmp/tmpgAjGdp/LICENSE,<br>这个里面的目标路径是个临时的/tmp/tmpgAjGdp/LICENSE,所以需要运行前就更改, 不能使用上面的办法,否则每次都会重新提示这种错误. 原因可能是/etc/hosts中的更改 www.googleapis.com 导致重定向</p>
+<p>Solution:</p>
+<ol>
+<li>修改download_from_google_storage.py, 然后单独使用以下命令单独下载. 注意不能使用step3中的get_webrtc, 否则会提示<br>Error: 20&gt;<br>20&gt;     You have unstaged changes.<br>20&gt;     Please commit, stash, or reset.<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python ./android/webrtc/src/build/android/play_services download --force</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>2.注释掉/etc/hosts中的 .www.googleapis.com 代理, 重新get_webrtc</p>
+<p>最后下载成功, 会提示<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/sqlite4java-0.282.jar…<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/linux-x86/libsqlite4java.so…<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/linux-x86_64/libsqlite4java.so…<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/mac-x86_64/libsqlite4java.jnilib…<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/windows-x86/sqlite4java.dll…<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/sqlite4java/lib/windows-x86_64/sqlite4java.dll…<br>Hook ‘/usr/bin/python src/build/android/update_deps/update_third_party_deps.py download -b chromium-sqlite4java -l third_party/sqlite4java’ took 91.55 secs</p>
+<p><strong><em>__</em></strong> running ‘/usr/bin/python src/build/android/update_deps/update_third_party_deps.py download -b chromium-robolectric -l third_party/xstream’ in ‘/media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc’<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/xstream/lib/xstream-1.4.8.jar…<br>Hook ‘/usr/bin/python src/build/android/update_deps/update_third_party_deps.py download -b chromium-robolectric -l third_party/xstream’ took 12.28 secs</p>
+<p><strong><em>__</em></strong> running ‘/usr/bin/python src/build/android/update_deps/update_third_party_deps.py download -b chromium-objenesis -l third_party/objenesis’ in ‘/media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc’<br>0&gt; Downloading /media/linux-shared/ClassicReference/Multimedia/WebRTC_BuildScripts2/webrtc-build-scripts/android/webrtc/src/third_party/objenesis/lib/objenesis-2.4.jar…</p>
+<h2 id="编译">编译</h2><p>使用以下命令, 等待约半小时即完成<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;# Build in debug mode&#10;export WEBRTC_DEBUG=true&#10;build_apprtc</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/02/Ubuntu-上下载webrtc-编译android版本/" data-id="cj73b4r9300065nwastaxz7e3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebRTC/">WebRTC</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/09/02/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/">Design</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jobs/">Jobs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebRTC/">WebRTC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocos2d-js/">cocos2d-js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/live-pusher/">live-pusher</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Design/" style="font-size: 10px;">Design</a><a href="/tags/Git/" style="font-size: 10px;">Git</a><a href="/tags/Jobs/" style="font-size: 20px;">Jobs</a><a href="/tags/WebRTC/" style="font-size: 10px;">WebRTC</a><a href="/tags/cocos2d-js/" style="font-size: 20px;">cocos2d-js</a><a href="/tags/live-pusher/" style="font-size: 10px;">live-pusher</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/09/02/Ubuntu-上下载webrtc-编译android版本/">Ubuntu 上下载webrtc , 编译android版本</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/19/Android推流在小米4内存上涨问题解决/">Android推流在小米4内存上涨问题解决</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/16/使用submodule来管理公共依赖工程/">使用submodule来管理公共依赖工程</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/02/Cocos2d-JS-功能点/">Cocos2d-JS 功能点</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

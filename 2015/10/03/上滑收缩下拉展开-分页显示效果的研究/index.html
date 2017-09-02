@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>上滑收缩下拉展开, 分页显示效果的研究 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="上滑收缩下拉展开, 且使用viewpager展开效果的研究尝试了不同的方案, 具体如下:
+
+Scrollvie中的onScroll时刻调用onLayout
+自定义最外层滑动效果的parent view
+使用Material Design Suppport中的控件
+
+1.  Scrollvie中的onScroll时刻调用onLayout  参考: http://blog.csdn.net/xiaan">
+<meta property="og:type" content="article">
+<meta property="og:title" content="上滑收缩下拉展开, 分页显示效果的研究">
+<meta property="og:url" content="http://yoursite.com/2015/10/03/上滑收缩下拉展开-分页显示效果的研究/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="上滑收缩下拉展开, 且使用viewpager展开效果的研究尝试了不同的方案, 具体如下:
+
+Scrollvie中的onScroll时刻调用onLayout
+自定义最外层滑动效果的parent view
+使用Material Design Suppport中的控件
+
+1.  Scrollvie中的onScroll时刻调用onLayout  参考: http://blog.csdn.net/xiaan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="上滑收缩下拉展开, 分页显示效果的研究">
+<meta name="twitter:description" content="上滑收缩下拉展开, 且使用viewpager展开效果的研究尝试了不同的方案, 具体如下:
+
+Scrollvie中的onScroll时刻调用onLayout
+自定义最外层滑动效果的parent view
+使用Material Design Suppport中的控件
+
+1.  Scrollvie中的onScroll时刻调用onLayout  参考: http://blog.csdn.net/xiaan">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-上滑收缩下拉展开-分页显示效果的研究" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/03/上滑收缩下拉展开-分页显示效果的研究/" class="article-date">
+  <time datetime="2015-10-03T13:59:06.000Z" itemprop="datePublished">2015-10-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      上滑收缩下拉展开, 分页显示效果的研究
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="上滑收缩下拉展开,_且使用viewpager展开效果的研究">上滑收缩下拉展开, 且使用viewpager展开效果的研究</h1><p>尝试了不同的方案, 具体如下:</p>
+<ul>
+<li>Scrollvie中的onScroll时刻调用onLayout</li>
+<li>自定义最外层滑动效果的parent view</li>
+<li>使用Material Design Suppport中的控件</li>
+</ul>
+<h2 id="1-_Scrollvie中的onScroll时刻调用onLayout">1.  Scrollvie中的onScroll时刻调用onLayout</h2><p>  参考: <a href="http://blog.csdn.net/xiaanming/article/details/17761431/" target="_blank" rel="external">http://blog.csdn.net/xiaanming/article/details/17761431/</a></p>
+<p>未解决部分: 当scrollview中含有Viewpager, 每个viewpager又是fragment时. 需要重写onMeaseure来设置scrollview的高度, 比较难实现.</p>
+<h2 id="2-_自定义最外层滑动效果的view—-OverlappingPaneLayout">2. 自定义最外层滑动效果的view—-OverlappingPaneLayout</h2><p>OverlappingPaneLayout内部包含Framelayout<br>此控件实现NestedScrollingParent(onStartNestedScroll,  onNestedPreScroll, onNestedPreFling, onNestedScroll, onStopNestedScroll)父类的方法, 里面的子控件需要实现NestedScrollingChild对应的子方法,  5.0以后原生系统支持.</p>
+<blockquote>
+<p>From what I can tell, both ListView (AbsListView) and ScrollView support this now (if running on API 21), but it must be enabled on the scrolling views.<br>There are two ways, by calling setNestedScrollingEnabled(true) or with the layout attribute android:nestedScrollingEnabled=”true” (which is undocumented)</p>
+</blockquote>
+<p>低于5.0版本需要继承,实现对应方法. 参考:<br><a href="http://segmentfault.com/a/1190000002873657" target="_blank" rel="external">http://segmentfault.com/a/1190000002873657</a></p>
+<p>未完善部分: 当子控件是PullRefreshListView时, 需要对基类实现NestedScrollingChild的方法, 有部分卡顿和不灵敏问题.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">com.android.dialer.widget.OverlappingPaneLayout</span></span><br><span class="line">    <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attribute">android:id</span>=<span class="value">"@+id/lists_frame"</span></span><br><span class="line">    <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">    <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">    <span class="attribute">android:animateLayoutChanges</span>=<span class="value">"true"</span> &gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">ListView</span></span><br><span class="line">        <span class="attribute">android:id</span>=<span class="value">"@+id/shortcut_card_list"</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:paddingTop</span>=<span class="value">"@dimen/action_bar_height_large"</span></span><br><span class="line">        <span class="attribute">android:background</span>=<span class="value">"@color/actionbar_background_color"</span></span><br><span class="line">        <span class="attribute">android:clipToPadding</span>=<span class="value">"false"</span></span><br><span class="line">        <span class="attribute">android:fadingEdge</span>=<span class="value">"none"</span></span><br><span class="line">        <span class="attribute">android:divider</span>=<span class="value">"@null"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">FrameLayout</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="title">LinearLayout</span></span><br><span class="line">            <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">            <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">            <span class="attribute">android:orientation</span>=<span class="value">"vertical"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="title">com.android.contacts.common.list.ViewPagerTabs</span></span><br><span class="line">                <span class="attribute">android:id</span>=<span class="value">"@+id/lists_pager_header"</span></span><br><span class="line">                <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">                <span class="attribute">android:layout_height</span>=<span class="value">"@dimen/tab_height"</span></span><br><span class="line">                <span class="attribute">android:textAllCaps</span>=<span class="value">"true"</span></span><br><span class="line">                <span class="attribute">android:orientation</span>=<span class="value">"horizontal"</span></span><br><span class="line">                <span class="attribute">android:layout_gravity</span>=<span class="value">"top"</span></span><br><span class="line">                <span class="attribute">android:elevation</span>=<span class="value">"@dimen/tab_elevation"</span></span><br><span class="line">                <span class="attribute">style</span>=<span class="value">"@style/DialtactsActionBarTabTextStyle"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="title">android.support.v4.view.ViewPager</span></span><br><span class="line">                <span class="attribute">android:id</span>=<span class="value">"@+id/lists_pager"</span></span><br><span class="line">                <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">                <span class="attribute">android:layout_height</span>=<span class="value">"0dp"</span></span><br><span class="line">                <span class="attribute">android:layout_weight</span>=<span class="value">"1"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="title">com.android.dialer.list.RemoveView</span></span><br><span class="line">            <span class="attribute">android:id</span>=<span class="value">"@+id/remove_view"</span></span><br><span class="line">            <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">            <span class="attribute">android:layout_height</span>=<span class="value">"@dimen/tab_height"</span></span><br><span class="line">            <span class="attribute">android:layout_alignParentTop</span>=<span class="value">"true"</span> &gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="title">LinearLayout</span></span><br><span class="line">                <span class="attribute">android:id</span>=<span class="value">"@+id/remove_view_content"</span></span><br><span class="line">                <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">                <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">                <span class="attribute">android:background</span>=<span class="value">"@color/actionbar_background_color"</span></span><br><span class="line">                <span class="attribute">android:gravity</span>=<span class="value">"center"</span></span><br><span class="line">                <span class="attribute">android:orientation</span>=<span class="value">"horizontal"</span></span><br><span class="line">                <span class="attribute">android:visibility</span>=<span class="value">"gone"</span> &gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="title">ImageView</span></span><br><span class="line">                    <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span></span><br><span class="line">                    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">                    <span class="attribute">android:layout_marginTop</span>=<span class="value">"8dp"</span></span><br><span class="line">                    <span class="attribute">android:layout_marginBottom</span>=<span class="value">"8dp"</span></span><br><span class="line">                    <span class="attribute">android:id</span>=<span class="value">"@+id/remove_view_icon"</span></span><br><span class="line">                    <span class="attribute">android:src</span>=<span class="value">"@drawable/ic_remove"</span></span><br><span class="line">                    <span class="attribute">android:contentDescription</span>=<span class="value">"@string/remove_contact"</span></span><br><span class="line">                    <span class="attribute">android:tint</span>=<span class="value">"@color/remove_text_color"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="title">TextView</span></span><br><span class="line">                    <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span></span><br><span class="line">                    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">                    <span class="attribute">android:id</span>=<span class="value">"@+id/remove_view_text"</span></span><br><span class="line">                    <span class="attribute">android:textSize</span>=<span class="value">"@dimen/remove_text_size"</span></span><br><span class="line">                    <span class="attribute">android:textColor</span>=<span class="value">"@color/remove_text_color"</span></span><br><span class="line">                    <span class="attribute">android:text</span>=<span class="value">"@string/remove_contact"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="title">com.android.dialer.list.RemoveView</span> &gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="title">FrameLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">com.android.dialer.widget.OverlappingPaneLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>参考:<br><a href="https://android.googlesource.com/platform/packages/apps/Dialer" target="_blank" rel="external">https://android.googlesource.com/platform/packages/apps/Dialer</a><br><a href="https://android.googlesource.com/platform/packages/apps/ContactsCommon" target="_blank" rel="external">https://android.googlesource.com/platform/packages/apps/ContactsCommon</a></p>
+<h2 id="3-_使用Material_Design_Suppport中的控件">3. 使用Material Design Suppport中的控件</h2><p>参考:<br><a href="https://github.com/yanbober/Android-Blog-Source/tree/master/Support-Library-Demo" target="_blank" rel="external">https://github.com/yanbober/Android-Blog-Source/tree/master/Support-Library-Demo</a></p>
+<p>需要扩展SwipeRefreshLayout<br><a href="https://github.com/androidwifi/SuperSwipeRefreshLayout" target="_blank" rel="external">https://github.com/androidwifi/SuperSwipeRefreshLayout</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/03/上滑收缩下拉展开-分页显示效果的研究/" data-id="cj73b4r8z00035nwatzf4133k" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/10/06/Userful-site/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Userful site
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/10/03/Building-Android-Source-code/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Building Android Source code</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/">Design</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jobs/">Jobs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebRTC/">WebRTC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocos2d-js/">cocos2d-js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/live-pusher/">live-pusher</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Design/" style="font-size: 10px;">Design</a><a href="/tags/Git/" style="font-size: 10px;">Git</a><a href="/tags/Jobs/" style="font-size: 20px;">Jobs</a><a href="/tags/WebRTC/" style="font-size: 10px;">WebRTC</a><a href="/tags/cocos2d-js/" style="font-size: 20px;">cocos2d-js</a><a href="/tags/live-pusher/" style="font-size: 10px;">live-pusher</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/09/02/Ubuntu-上下载webrtc-编译android版本/">Ubuntu 上下载webrtc , 编译android版本</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/19/Android推流在小米4内存上涨问题解决/">Android推流在小米4内存上涨问题解决</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/16/使用submodule来管理公共依赖工程/">使用submodule来管理公共依赖工程</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/02/Cocos2d-JS-功能点/">Cocos2d-JS 功能点</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
