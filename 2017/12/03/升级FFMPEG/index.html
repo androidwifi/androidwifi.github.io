@@ -5,15 +5,21 @@
   
   <title>升级FFMPEG | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="FFMPEG以下记录FFMPEG从2.1.1升级到3.3.2版本的全过程。第一阶段：2.1.1-&amp;gt;2.6.9第二阶段：2.6.9-&amp;gt;3.0第三阶段：2.6.9-&amp;gt;3.0">
+  <meta name="description" content="FFMPEG以下记录FFMPEG从2.1.1升级到3.3.2版本的全过程。第一阶段：2.1.1-&amp;gt;2.6.9第二阶段：2.6.9-&amp;gt;3.0第三阶段：2.6.9-&amp;gt;3.0
+更改configure--    ranlib_default=&amp;quot;${cross_prefix}${ranlib_default} -D&amp;quot;
+++    ranlib_default=&amp;quot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="升级FFMPEG">
 <meta property="og:url" content="http://yoursite.com/2017/12/03/升级FFMPEG/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="FFMPEG以下记录FFMPEG从2.1.1升级到3.3.2版本的全过程。第一阶段：2.1.1-&amp;gt;2.6.9第二阶段：2.6.9-&amp;gt;3.0第三阶段：2.6.9-&amp;gt;3.0">
+<meta property="og:description" content="FFMPEG以下记录FFMPEG从2.1.1升级到3.3.2版本的全过程。第一阶段：2.1.1-&amp;gt;2.6.9第二阶段：2.6.9-&amp;gt;3.0第三阶段：2.6.9-&amp;gt;3.0
+更改configure--    ranlib_default=&amp;quot;${cross_prefix}${ranlib_default} -D&amp;quot;
+++    ranlib_default=&amp;quot">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="升级FFMPEG">
-<meta name="twitter:description" content="FFMPEG以下记录FFMPEG从2.1.1升级到3.3.2版本的全过程。第一阶段：2.1.1-&amp;gt;2.6.9第二阶段：2.6.9-&amp;gt;3.0第三阶段：2.6.9-&amp;gt;3.0">
+<meta name="twitter:description" content="FFMPEG以下记录FFMPEG从2.1.1升级到3.3.2版本的全过程。第一阶段：2.1.1-&amp;gt;2.6.9第二阶段：2.6.9-&amp;gt;3.0第三阶段：2.6.9-&amp;gt;3.0
+更改configure--    ranlib_default=&amp;quot;${cross_prefix}${ranlib_default} -D&amp;quot;
+++    ranlib_default=&amp;quot">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -82,11 +88,73 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>FFMPEG<br>以下记录FFMPEG从2.1.1升级到3.3.2版本的全过程。<br>第一阶段：2.1.1-&gt;2.6.9<br>第二阶段：2.6.9-&gt;3.0<br>第三阶段：2.6.9-&gt;3.0</p>
+<p>更改configure<br><code>--    ranlib_default=&quot;${cross_prefix}${ranlib_default} -D&quot;
+++    ranlib_default=&quot;${cross_prefix}${ranlib_default} -t&quot;
+每个都得改ranlib_default -D为-t</code></p>
+<p>n3.3.2(更改调用+还原av_rescale_rnd[线上已被修改为2.8.7的]: HE OK, SE 码率过大;<br>       更改调用２　+ 还原av_rescale_rnd:　OK)</p>
+<p>n3.3(更改调用+还原av_rescale_rnd：　HE OK, SE 码率过大)<br>n3.2(更改调用+还原av_rescale_rnd:  HE OK, SE 码率过大)<br>n3.1(更改调用+还原av_rescale_rnd:  HE OK, SE 码率过大)</p>
+<p>5d12cfacde01bf59cb876f4fb7c1e10a40f4527f avfilter/vf_histogram: indent histogram options<br>(更改调用+还原av_rescale_rnd: HE OK, SE 码率过大)</p>
+<p>281caece46c4a82c8c4c49b0847867e3be053a85　avfilter/avfiltergraph: Clear graph pointers in ff_filter_graph_remove_filter()<br>(更改调用+还原av_rescale_rnd: HE OK, SE 码率过大)</p>
+<p>d55568d22a5a6e59c087b8614227d5a0a3da4164 Merge commit ‘71d3305c2711d4f6ec8b92db09ff64cf4e19a58e’<br>(更改调用+还原av_rescale_rnd: HE OK, SE 码率过大)</p>
+<p>6f784c158bd56f2cc73354974ceebb04a40e0f52  Merge commit ‘549fc77273636d0d02175362af5dcd60c79f7633’<br>(更改调用+还原av_rescale_rnd: HE OK, SE 码率过大)</p>
+<p>af9cac1be1750ecc0e12c6788a3aeed1f1a778be　　Merge commit ‘33d18982fa03feb061c8f744a4f0a9175c1f63ab’<br>(更改调用+还原av_rescale_rnd: HE OK, SE 码率过大)</p>
+<p>6f69f7a8bf6a0d013985578df2ef42ee6b1c7994　　Merge commit ‘9200514ad8717c63f82101dc394f4378854325bf’<br>(更改调用+还原av_rescale_rnd: HE OK, SE 码率过大；　更改调用２　+ 还原av_rescale_rnd:　OK)</p>
+<p>本次提交导致SE 码率过大<br>9200514ad8717c63f82101dc394f4378854325bf lavf: replace AVStream.codec with AVStream.codecpar</p>
+<p>60b75186b2c878b6257b43c8fcc0b1356ada218e  avcodec/wmalosslessdec: do not discard last frame<br>(更改调用+还原av_rescale_rnd: HE OK, SE OK)</p>
+<p>7e1e25c2dced3e76bb4d35ad082f2abf6ae41c4c lavf/avio: Remove linebreak from https warning.<br>(更改调用+还原av_rescale_rnd: HE OK, SE　OK)</p>
+<p>b0c026a27f9498b8f118684a2830ca7df7eae374 lavf/rawenc: Add a raw gsm muxer.<br>(更改调用+还原av_rescale_rnd: HE　OK, SE OK)</p>
+<p>0c9490609d888ba384798777a3daaf012488ad89　　avformat: support shorten in nistshpere demuxer<br>(更改调用+还原av_rescale_rnd: HE　OK, SE OK)</p>
+<p>263eb76bdf5c5486c9eed0ac2e3416ce13db9821　sws/aarch64: add ff_hscale_8_to_15_neon<br>(更改调用+还原av_rescale_rnd: HE OK, SE OK)</p>
+<p>n3.0.9(更改调用+还原av_rescale_rnd: HE OK, SE OK)</p>
+<p>n3.0.8(更改调用+还原av_rescale_rnd: HE OK, SE OK)</p>
+<p>n3.0.5(更改调用+还原av_rescale_rnd: HE OK,SE OK)</p>
+<p>n3.0　(更改调用:　SE no A&V; HE no A&V;  更改调+还原av_rescale_rnd[线上已被修改为2.8.7的]：SE OK, HE OK)</p>
+<p>//============================================================================================<br>n2.9-dev (更改调用：HE.SE都OK; 不需要还原av_rescale_rnd，　线上已经还原)   </p>
+<p>n2.8.7   (更改调用：HE.SE 无流；　还原av_rescale_rnd　SE&amp;HE OK)</p>
+<p>n2.8.5  (Change invoking SE&amp;HE： no A&amp;v, 停止瞬间有一阵A)</p>
+<p>n2.8.4　(Change invoking: SE&amp;HE no A&amp;V, 停止瞬间有一阵A)</p>
+<p>76af12f5429b72820afd3b448cb38e9709993b03   ffmdec: reject zero-sized chunks    (Change invoking: SE&amp;HE no A&amp;V, 停止瞬间有一阵A)</p>
+<p>e04b039b1528f4c7df5c2b93865651bfea168a19<br>avutil/mathematics: return INT64_MIN (=AV_NOPTS_VALUE) from av_rescale_rnd() for overflows  (Change invoking: SE&amp;HE no A&amp;V, 停止瞬间有一阵A)</p>
+<p>8cd3def81d11c20052a0044d59c67da3e1a1a5c8<br>avcodec/mpeg4videodec: Check available data before reading custom matrix (Change invoking: SE&amp;HE no A&amp;V, 停止瞬间有一阵A)</p>
+<p>这个提交导致SE&amp;HE no A&amp;V, 停止瞬间有一阵A<br>460710500e172042144784a3152aa8d1c5c29cf6<br>avutil/mathematics: Do not treat INT64_MIN as positive in av_rescale_rnd (Change invoking: SE&amp;HE no A&amp;V, 停止瞬间有一阵A)</p>
+<ul>
+<li>if (a &lt; 0 &amp;&amp; a != INT64_MIN)</li>
+<li>return -av_rescale_rnd(-a, b, c, rnd ^ ((rnd &gt;&gt; 1) &amp; 1));</li>
+</ul>
+<ul>
+<li>if (a &lt; 0)</li>
+<li>return -av_rescale_rnd(-FFMAX(a, -INT64_MAX), b, c, rnd ^ ((rnd &gt;&gt; 1) &amp; 1));</li>
+</ul>
+<p>4d9999705f406b508e4ba017cd804b8688b64d68<br>avutil/integer: Fix av_mod_i() with negative dividend   (Change invoking: SE OK, HE OK)</p>
+<p>3d69716baefdbff3e5584f9de665bbba884667d6<br>avformat/dump: Fix integer overflow in av_dump_format() (Change invoking: SE OK, HE OK)  </p>
+<p>n2.8.3  (Change invoking: SE ok, HE ok)<br>n2.8 avcodec/h264_sei: Remove “Subtitles with data type 0x%02x” sample request （Change invoking: SE ok, HE OK）</p>
+<p>51d4bca5a40b8087c43421873e1c2262b6a74a76    avcodec/pngdec: fully support the tRNS chunk  （SE No A; HE No V）<br>更改调用st-&gt;pts.val为priv_pts-&gt;val， SE OK， HE OK<br>需要在avformat里加上internal.h os-support.h</p>
+<p>91f1115a0e027074c90bac6e57c2d0f4fe9efe8c  avcodec/vc1dec: Re-order init to avoid initting hwaccel too early（SE No A; HE No V。  ）<br>注释掉<br>sce-&gt;tns.present = 0;<br>return;<br>任然SE No A; HE No V</p>
+<p>f5258a7d16d01ddce0913b110a5d407d460c3906  Merge commit ‘e176639bcbf4b580edb462a6b0650e53cd5e3c04’(SE No A; HE No V)<br>包含libavcodec/aacenc_tns.c<br>sce-&gt;tns.present = 0;<br>return;</p>
+<p>bd074bde02aa11b93958300f06be2a18b549091a  Merge commit ‘fdd021884d5c06fb9ad65cb0040bb5717a7b084b’   (SE No A; HE No V)<br>包含libavcodec/aacenc_tns.c<br>注释掉<br>sce-&gt;tns.present = 0;<br>return;<br>任然SE No A; HE No V</p>
+<p>以下提交   fix Compile failed<br>94a4be85a1fcd57fdfd45dc291813d6afef8a87b    configure: aac encoder requires lpc<br> aac_decoder_select=”imdct15 mdct sinewin”<br> aac_fixed_decoder_select=”mdct sinewin”<br>-aac_encoder_select=”audio_frame_queue iirfilter mdct sinewin”<br>+aac_encoder_select=”audio_frame_queue iirfilter lpc mdct sinewin”</p>
+<p>fd2977d85f42140c0159fdcb343fafd9f6e9098c  Merge commit ‘e23f84d9652474353d8bbc42787a56ec1991908f’  (Compile failed， add lpc：SE No A; HE No V)<br>不加lpc：<br>libavcodec/libavcodec.a(aacenc.o): In function <code>aac_encode_end&#39;:
+aacenc.c:(.text.unlikely+0x28): undefined reference to</code>ff_lpc_end’<br>libavcodec/libavcodec.a(aacenc.o): In function <code>aac_encode_init&#39;:
+aacenc.c:(.text.unlikely+0x4a8): undefined reference to</code>ff_lpc_init’</p>
+<p>24e6729a049e476414ed677b97950421ab86c673    swresample/dither: use integer arithmetic  (Compile failed，add lpc：SE No A; HE No V)<br>不加lpc：<br>libavcodec/libavcodec.a(aacenc.o): In function <code>aac_encode_end&#39;:
+aacenc.c:(.text.unlikely+0x28): undefined reference to</code>ff_lpc_end’<br>libavcodec/libavcodec.a(aacenc.o): In function <code>aac_encode_init&#39;:
+aacenc.c:(.text.unlikely+0x4a8): undefined reference to</code>ff_lpc_init’<br>注释掉<br>sce-&gt;tns.present = 0;<br>return;<br>任然SE No A; HE No V</p>
+<p>这次提交导致在注释调return情况下 任然SE No A; HE No V<br>b4d68e7cdb3be029c669b15ac0da158454fb910d  avformat: Remove use of AVFrac and AVStream-&gt;pts    (Compile failed，add lpc + un-comment：SE No A; HE No V)</p>
+<p>6638e4a950a0208534b1081660fa4549aef61d74  avcodec/x86/mpegaudiodsp: correct asm guards        (Compile failed，add lpc + un-comment：OK)</p>
+<p>4f396a6f30248e3870d3837cfebc4779e91a3a3a  fate: temporarily disable AAC TNS test              (Compile failed，add lpc + un-comment：OK)</p>
+<p>以下提交导致SE No A; HE No V<br>f2ba60d4e9cad7a92279387ed0a228660d83ed89   aacenc_tns: temporarily disable                                          (Compile failed, add lpc：SE No A; HE No V)</p>
+<p>eb3cfa7dd3239faabb3e2b4211c97b31da6bd39b   swscale/alphablend: fix pointer cast                                     (Compile failed, add lpc：OK)</p>
+<p>e10ef3289d7023754ce43ffd24923359a6195e67  aacsbr<em>fixed: Make fixed</em>{exp,log}_table static const                     (Compile failed, add lpc：OK)</p>
+<p>7adb6d5aab33bf0bc4efebeef4b188016f812086   aacenc_quantization: replace copysign() with a ternary operator         (Compile failed, add lpc OK)<br>不加lpc：<br>libavcodec/libavcodec.a(aacenc.o): In function <code>aac_encode_end&#39;:
+aacenc.c:(.text.unlikely+0x28): undefined reference to</code>ff_lpc_end’<br>libavcodec/libavcodec.a(aacenc.o): In function <code>aac_encode_init&#39;:
+aacenc.c:(.text.unlikely+0x4a8): undefined reference to</code>ff_lpc_init’<br>libavcodec/libavcodec.a(aacenc_tns.o): In function <code>ff_aac_search_for_tns&#39;:
+aacenc_tns.c:(.text+0x2ec): undefined reference to</code>ff_lpc_calc_coefs’</p>
+<p>907373ea9d23f782d438dd18babfd75cb5ab305a    avcodec/x86/v210-init: fix unused variable warning                     (OK)<br>ad7d972e08dddb1788ac6a434d1be314febcb09d    lavfi: add error message to help users convert to new lavfi syntax.     OK)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/03/升级FFMPEG/" data-id="cjapjwtla0000npwa78qk8w75" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/03/升级FFMPEG/" data-id="cjapkqi940000e1wa9zqwp46e" class="article-share-link">Share</a>
       
       
     </footer>
