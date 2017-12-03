@@ -88,7 +88,7 @@
 ++    ranlib_default=&quot;${cross_prefix}${ranlib_default} -t&quot;
 每个都得改ranlib_default -D为-t</code></p>
 <p>调用方式１：<br>AVstream的pts.val用AVStream的priv_pts-&gt;val代替</p>
-<p>调用方式２：<br>Audio的AVPacket编码时没有更新里面的pts和dts值（为最小负数INT64_MIN -9223372036854775808），导致av_interleaved_write_frame后priv_pts-&gt;val的值是一个负数-209146758205323690</p>
+<p>调用方式２：<br>Audio的AVPacket编码时没有更新里面的pts和dts值（为最小负数INT64_MIN -9223372036854775808），导致av_interleaved_write_frame后priv_pts-&gt;val的值是一个负数-209146758205323690,同步策略无法实现</p>
 <p>n3.3.2(更改调用+还原av_rescale_rnd[线上已被修改为2.8.7的]: HE OK, SE 码率过大;<br>       更改调用２　+ 还原av_rescale_rnd:　OK)</p>
 <p>n3.3(更改调用+还原av_rescale_rnd：　HE OK, SE 码率过大)<br>n3.2(更改调用+还原av_rescale_rnd:  HE OK, SE 码率过大)<br>n3.1(更改调用+还原av_rescale_rnd:  HE OK, SE 码率过大)</p>
 <p>5d12cfacde01bf59cb876f4fb7c1e10a40f4527f avfilter/vf_histogram: indent histogram options<br>(更改调用+还原av_rescale_rnd: HE OK, SE 码率过大)</p>
@@ -107,7 +107,7 @@
 <p>n3.0.8(更改调用+还原av_rescale_rnd: HE OK, SE OK)</p>
 <p>n3.0.5(更改调用+还原av_rescale_rnd: HE OK,SE OK)</p>
 <p>n3.0　(更改调用:　SE no A&V; HE no A&V;  更改调+还原av_rescale_rnd[线上已被修改为2.8.7的]：SE OK, HE OK)</p>
-<p>//============================================================================================<br>n2.9-dev (更改调用：HE.SE都OK; 不需要还原av_rescale_rnd，　线上已经还原)   </p>
+<p>n2.9-dev (更改调用：HE.SE都OK; 不需要还原av_rescale_rnd，　线上已经还原)</p>
 <p>n2.8.7   (更改调用：HE.SE 无流；　还原av_rescale_rnd　SE&amp;HE OK)</p>
 <p>n2.8.5  (Change invoking SE&amp;HE： no A&amp;v, 停止瞬间有一阵A)</p>
 <p>n2.8.4　(Change invoking: SE&amp;HE no A&amp;V, 停止瞬间有一阵A)</p>
@@ -137,13 +137,13 @@ aacenc.c:(.text.unlikely+0x4a8): undefined reference to</code>ff_lpc_init’</p>
 <p>24e6729a049e476414ed677b97950421ab86c673    swresample/dither: use integer arithmetic  (Compile failed，add lpc：SE No A; HE No V)<br>不加lpc：<br>libavcodec/libavcodec.a(aacenc.o): In function <code>aac_encode_end&#39;:
 aacenc.c:(.text.unlikely+0x28): undefined reference to</code>ff_lpc_end’<br>libavcodec/libavcodec.a(aacenc.o): In function <code>aac_encode_init&#39;:
 aacenc.c:(.text.unlikely+0x4a8): undefined reference to</code>ff_lpc_init’<br>注释掉<br>sce-&gt;tns.present = 0;<br>return;<br>任然SE No A; HE No V</p>
-<p>这次提交导致在注释调return情况下 任然SE No A; HE No V<br>b4d68e7cdb3be029c669b15ac0da158454fb910d  avformat: Remove use of AVFrac and AVStream-&gt;pts    (Compile failed，add lpc + un-comment：SE No A; HE No V)</p>
+<h3 id="pts计算失败">pts计算失败</h3><p>这次提交导致在注释调return情况下 任然SE No A; HE No V<br><strong>b4d68e7cdb3be029c669b15ac0da158454fb910d  avformat: Remove use of AVFrac and AVStream-&gt;pts </strong><br>  (Compile failed，add lpc + un-comment：SE No A; HE No V)</p>
 <p>6638e4a950a0208534b1081660fa4549aef61d74  avcodec/x86/mpegaudiodsp: correct asm guards        (Compile failed，add lpc + un-comment：OK)</p>
 <p>4f396a6f30248e3870d3837cfebc4779e91a3a3a  fate: temporarily disable AAC TNS test              (Compile failed，add lpc + un-comment：OK)</p>
 <h3 id="无声音或则无视频">无声音或则无视频</h3><p>以下提交导致SE No A; HE No V<br><strong>f2ba60d4e9cad7a92279387ed0a228660d83ed89   aacenc_tns: temporarily disable</strong>                                          (Compile failed, add lpc：SE No A; HE No V)</p>
 <p>eb3cfa7dd3239faabb3e2b4211c97b31da6bd39b   swscale/alphablend: fix pointer cast                                     (Compile failed, add lpc：OK)</p>
 <p>e10ef3289d7023754ce43ffd24923359a6195e67  aacsbr<em>fixed: Make fixed</em>{exp,log}_table static const                     (Compile failed, add lpc：OK)</p>
-<p>7adb6d5aab33bf0bc4efebeef4b188016f812086   aacenc_quantization: replace copysign() with a ternary operator         (Compile failed, add lpc OK)<br>不加lpc：<br>libavcodec/libavcodec.a(aacenc.o): In function <code>aac_encode_end&#39;:
+<h3 id="编译失败">编译失败</h3><p><strong>7adb6d5aab33bf0bc4efebeef4b188016f812086   aacenc_quantization: replace copysign() with a ternary operator </strong><br> (Compile failed, add lpc OK)<br>不加lpc：<br>libavcodec/libavcodec.a(aacenc.o): In function <code>aac_encode_end&#39;:
 aacenc.c:(.text.unlikely+0x28): undefined reference to</code>ff_lpc_end’<br>libavcodec/libavcodec.a(aacenc.o): In function <code>aac_encode_init&#39;:
 aacenc.c:(.text.unlikely+0x4a8): undefined reference to</code>ff_lpc_init’<br>libavcodec/libavcodec.a(aacenc_tns.o): In function <code>ff_aac_search_for_tns&#39;:
 aacenc_tns.c:(.text+0x2ec): undefined reference to</code>ff_lpc_calc_coefs’</p>
@@ -152,7 +152,7 @@ aacenc_tns.c:(.text+0x2ec): undefined reference to</code>ff_lpc_calc_coefs’</p
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/03/升级FFMPEG/" data-id="cjaqjljxl0000qrwatafg98mr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/03/升级FFMPEG/" data-id="cjaqky53o00008bwaxf1zupw7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -195,7 +195,7 @@ aacenc_tns.c:(.text+0x2ec): undefined reference to</code>ff_lpc_calc_coefs’</p
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/02/The-stragedy-of-breaking-GFW/" data-id="cjaqjljy00009qrwajo58p9ks" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/02/The-stragedy-of-breaking-GFW/" data-id="cjaqky54200098bwah3x6nda2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/">Tools</a></li></ul>
@@ -264,7 +264,7 @@ aacenc_tns.c:(.text+0x2ec): undefined reference to</code>ff_lpc_calc_coefs’</p
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/02/Ubuntu-上下载webrtc-编译android版本/" data-id="cjaqjljxy0006qrwalj5o8llp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/02/Ubuntu-上下载webrtc-编译android版本/" data-id="cjaqky54000068bwamwphdnsi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebRTC/">WebRTC</a></li></ul>
@@ -326,7 +326,7 @@ aacenc_tns.c:(.text+0x2ec): undefined reference to</code>ff_lpc_calc_coefs’</p
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/19/Android推流在小米4内存上涨问题解决/" data-id="cjaqjljyk000sqrwazv2zmc6v" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/19/Android推流在小米4内存上涨问题解决/" data-id="cjaqky54m000s8bwayuhmafd0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/live-pusher/">live-pusher</a></li></ul>
@@ -375,7 +375,7 @@ aacenc_tns.c:(.text+0x2ec): undefined reference to</code>ff_lpc_calc_coefs’</p
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/16/使用submodule来管理公共依赖工程/" data-id="cjaqjljxr0001qrwaoa0jdct8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/16/使用submodule来管理公共依赖工程/" data-id="cjaqky53t00018bwaagglcbmh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -431,7 +431,7 @@ capabilities : {"opengl":true,"accelerometer":true,"touches":true,"keyboard":tru
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/12/02/Cocos2d-JS-功能点/" data-id="cjaqjljyf000pqrwajh5tispu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/12/02/Cocos2d-JS-功能点/" data-id="cjaqky54h000p8bwa5nt0jgh1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cocos2d-js/">cocos2d-js</a></li></ul>
@@ -469,7 +469,7 @@ capabilities : {"opengl":true,"accelerometer":true,"touches":true,"keyboard":tru
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/18/JNI/" data-id="cjaqjljy4000fqrwaq3r9sg88" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/18/JNI/" data-id="cjaqky545000f8bwaapu3kaux" class="article-share-link">Share</a>
       
       
     </footer>
@@ -507,7 +507,7 @@ capabilities : {"opengl":true,"accelerometer":true,"touches":true,"keyboard":tru
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/06/Userful-site/" data-id="cjaqjljxx0005qrwaqqo0vtqf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/06/Userful-site/" data-id="cjaqky53z00058bwa7b21skcz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -561,7 +561,7 @@ capabilities : {"opengl":true,"accelerometer":true,"touches":true,"keyboard":tru
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/03/上滑收缩下拉展开-分页显示效果的研究/" data-id="cjaqjljxw0004qrwa61ewv8x1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/03/上滑收缩下拉展开-分页显示效果的研究/" data-id="cjaqky53y00048bwax53yqadi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -623,7 +623,7 @@ lunch后选择默认lunch aosp_arm-eng, 直接确认即可, <span class="built_i
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/03/Building-Android-Source-code/" data-id="cjaqjljyh000rqrwarfl1ga0z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/03/Building-Android-Source-code/" data-id="cjaqky54k000r8bwa07ho4c9t" class="article-share-link">Share</a>
       
       
     </footer>
