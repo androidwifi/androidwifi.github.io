@@ -5,19 +5,19 @@
   
   <title>升级FFMPEG | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="FFMPEG以下记录FFMPEG从2.1.1升级到3.3.2版本的全过程。第一阶段：2.1.1-&amp;gt;2.6.9第二阶段：2.6.9-&amp;gt;3.0第三阶段：2.6.9-&amp;gt;3.0
+  <meta name="description" content="FFMPEG以下记录FFMPEG从2.1.1升级到3.3.2版本的全过程。第一阶段：2.1.1-&amp;gt;2.6.9第二阶段：2.6.9-&amp;gt;3.0第三阶段：3.1-&amp;gt;3.3.2
 更改configure--    ranlib_default=&amp;quot;${cross_prefix}${ranlib_default} -D&amp;quot;
 ++    ranlib_default=&amp;quot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="升级FFMPEG">
 <meta property="og:url" content="http://yoursite.com/2017/12/03/升级FFMPEG/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="FFMPEG以下记录FFMPEG从2.1.1升级到3.3.2版本的全过程。第一阶段：2.1.1-&amp;gt;2.6.9第二阶段：2.6.9-&amp;gt;3.0第三阶段：2.6.9-&amp;gt;3.0
+<meta property="og:description" content="FFMPEG以下记录FFMPEG从2.1.1升级到3.3.2版本的全过程。第一阶段：2.1.1-&amp;gt;2.6.9第二阶段：2.6.9-&amp;gt;3.0第三阶段：3.1-&amp;gt;3.3.2
 更改configure--    ranlib_default=&amp;quot;${cross_prefix}${ranlib_default} -D&amp;quot;
 ++    ranlib_default=&amp;quot">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="升级FFMPEG">
-<meta name="twitter:description" content="FFMPEG以下记录FFMPEG从2.1.1升级到3.3.2版本的全过程。第一阶段：2.1.1-&amp;gt;2.6.9第二阶段：2.6.9-&amp;gt;3.0第三阶段：2.6.9-&amp;gt;3.0
+<meta name="twitter:description" content="FFMPEG以下记录FFMPEG从2.1.1升级到3.3.2版本的全过程。第一阶段：2.1.1-&amp;gt;2.6.9第二阶段：2.6.9-&amp;gt;3.0第三阶段：3.1-&amp;gt;3.3.2
 更改configure--    ranlib_default=&amp;quot;${cross_prefix}${ranlib_default} -D&amp;quot;
 ++    ranlib_default=&amp;quot">
   
@@ -87,7 +87,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>FFMPEG<br>以下记录FFMPEG从2.1.1升级到3.3.2版本的全过程。<br>第一阶段：2.1.1-&gt;2.6.9<br>第二阶段：2.6.9-&gt;3.0<br>第三阶段：2.6.9-&gt;3.0</p>
+        <p>FFMPEG<br>以下记录FFMPEG从2.1.1升级到3.3.2版本的全过程。<br>第一阶段：2.1.1-&gt;2.6.9<br>第二阶段：2.6.9-&gt;3.0<br>第三阶段：3.1-&gt;3.3.2</p>
 <p>更改configure<br><code>--    ranlib_default=&quot;${cross_prefix}${ranlib_default} -D&quot;
 ++    ranlib_default=&quot;${cross_prefix}${ranlib_default} -t&quot;
 每个都得改ranlib_default -D为-t</code></p>
@@ -156,7 +156,7 @@ aacenc_tns.c:(.text+0x2ec): undefined reference to</code>ff_lpc_calc_coefs’</p
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/03/升级FFMPEG/" data-id="cjaqjj67d0000omwa146dso2s" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/03/升级FFMPEG/" data-id="cjaqjljxl0000qrwatafg98mr" class="article-share-link">Share</a>
       
       
     </footer>
